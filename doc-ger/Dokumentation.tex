@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ngerman, lmodern}
+
+\newcommand{\mytitle}{Chaoskontrolle}
+\newcommand{\myauthor}{Jann Horn und Hannes Riechert}
+
+\usepackage{graphicx, wrapfig, subfigure, color, amsmath, amsthm}
+\usepackage{fancyhdr}
+  \lhead{\myauthor}
+  \chead{}
+  \rhead{\nouppercase\leftmark}
+  \lfoot{}
+  \cfoot{\thepage}
+  \rfoot{}
+%\usepackage{setspace}
+%  \onehalfspacing % Zeilenabstand
+% \usepackage[numbers]{natbib} % bibliography
+
+\newcommand{\TODO}{\textcolor{red}{ \textbf TODO }}
+\newcommand{\mathematik}{\begin{equation*}\begin{aligned}}
+\newcommand{\mathematikstop}{\end{aligned}\end{equation*}}
+\renewcommand{\phi}{\varphi} % make "stroked" phi look "loopy"
+\newcommand{\half}{\frac{1}{2}}
+
+%\clubpenalty = 10000
+%\widowpenalty = 10000
+%\displaywidowpenalty = 10000
+
+\title{\mytitle}
+\author{\myauthor}
+%\date{ }
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\TODO The abstract goes here.
+\end{abstract}
+
+\newpage
+\section{Herleitung der Differentialgleichungen}
+\input{Herleitung.tex}
+
+\end{document}
+
