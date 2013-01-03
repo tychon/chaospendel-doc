@@ -1,7 +1,9 @@
 
-DOCS=Dokumentation.tex Herleitung_standalone.tex
+DOCS=Dokumentation.pdf Herleitung_standalone.pdf
 
 # this is a phony target
 all: $(DOCS)
-	rubber --inplace -pdf $(DOCS)
+
+%.pdf: %.tex
+	pdflatex $*.tex
 
