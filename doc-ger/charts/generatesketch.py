@@ -15,6 +15,7 @@ f = open('../../network/data_pendulum', 'r');
 maxpendlength = 0
 radius = []
 angles = []
+coils = []
 
 sys.stderr.write("loading file ...\n");
 
@@ -34,6 +35,8 @@ for line in f:
         radius.append(float(mo.group(2)))
       elif mo2.group(1) == "solangle":
         angles.append(float(mo.group(2)))
+      elif mo2.group(1) == "solcoils":
+        coils.append(float(mo.group(2)))
 
 sys.stderr.write("maximum pendulum length: "+str(maxpendlength)+"\n");
 sys.stderr.write("formatting svg ...\n");
@@ -51,12 +54,17 @@ print '<line x1="'+str(imagewidth/2)+'" y1="'+str(imagewidth/2)+'" x2="'+str(ima
 print '<line x1="0" y1="'+str(imagewidth/2)+'" x2="'+str(imagewidth)+'" y2="'+str(imagewidth/2)+'" stroke="black" stroke-width="1" stroke-dasharray="5, 5" />'
 
 # solenoids
-for (r, a) in zip(radius, angles):
+for (r, a, c) in zip(radius, angles, coils):
   xpos = math.sin(a / 360 * 2 * math.pi) * r * scale + imagewidth/2;
   ypos = math.cos(a / 360 * 2 * math.pi) * r * scale + imagewidth/2;
+  # dashed line connecting solenoids with center
   print '<line x1="'+str(imagewidth/2)+'" y1="'+str(imagewidth/2)+'" x2="'+str(xpos)+'" y2="'+str(ypos)+'" stroke="grey" stroke-width="1" stroke-dasharray="2, 2" />'
-  print '<circle cx="'+str(xpos)+'" cy="'+str(ypos)+'" r="'+str(solradius)+'" fill="red" />'
+  # colored circle
+  if c > 10000: print '<circle cx="'+str(xpos)+'" cy="'+str(ypos)+'" r="'+str(solradius)+'" fill="darkgreen" />'
+  else: print '<circle cx="'+str(xpos)+'" cy="'+str(ypos)+'" r="'+str(solradius)+'" fill="red" />'
+  # text: radius
   print '<text x="'+str(xpos+solradius)+'" y="'+str(ypos)+'" fill="black" font-size="'+str(anglefontsize)+'">'+str(r)+'m</text>'
+  # text: angle
   print '<text x="'+str(xpos+solradius)+'" y="'+str(ypos+anglefontsize)+'" fill="black" font-size="'+str(anglefontsize)+'">'+str(a)+'&#176;</text>'
 
 print """</svg>"""
