@@ -4,45 +4,45 @@ befestigten Magneten, der in am Rahmen montierten Spulen elektrische Ströme
 hervorruft, wenn er an diesen vorbeibewegt wird.
 
 Diese Ströme verursachen Spannungsschwankungen an den Spulen. Um diese zu messen,
-verbinden wir alle Spulen auf einer Seite mit einer 3.3V-Spannungsquelle und auf der
-anderen mit den 16 Analogeingängen eines ATmega2560-Mikrocontrollers. Der auf einen
-Messbereich von 0-5V eingestellte Mikrocontroller iteriert dann in einer Endlosschleife
+verbinden wir alle Spulen auf einer Seite mit einer 3,3 V--Span"-nungs"-quel"-le und auf der
+anderen mit den 16 Analogeingängen eines ATmega2560--Mi"-kro"-con"-trollers. Der auf einen
+Messbereich von 0 bis 5V eingestellte Mikrocontroller iteriert dann in einer Endlosschleife
 über alle Eingänge, misst die an ihnen momentan anliegenden Spannungen mit einer
-Auflösung von 10 Bit und leitet sie an einen Serial-to-USB-Konverter weiter. Der Messbereich
-ist dadurch zwar relativ zur Grundspannung asymmetrisch - der maximale negative Ausschlag beträgt
-theoretisch 3.3V, während der maximale positive Ausschlag $ 5V - 3.3V = 1.7V $ beträgt -, aber
-Spannungsregler für 3.3V sind einfacher verfügbar als welche für 2.5V.
+Auflösung von 10 Bit und leitet sie an einen Serial--to--USB--Konverter weiter. Der Messbereich
+ist dadurch zwar relativ zur Grundspannung asymmetrisch --- der maximale negative Ausschlag beträgt
+theoretisch 3,3 V, während der maximale positive Ausschlag $ 5V - 3,3 V = 1.7 V $ beträgt ---, aber
+Spannungsregler für 3,3 V sind einfacher verfügbar als welche für 2,5 V.
 % zusätzliches argument: negative spitzen machen mist?
 
-Der Serial-to-USB-Konverter ist per USB an einen Computer angeschlossen, der die 5V-Stromversorgung
+Der Serial--to--USB--Konverter ist per USB an einen Computer angeschlossen, der die 5V--Stromversorgung
 bereitstellt und die Messwerte aufzeichnen und verarbeiten kann.
 
-Die 10-Bit-Auflösung des Mikrocontrollers bedeutet, dass die Schrittweite für die Digitalisierung
-der Eingangswerte $ 5V / 2^{10} = 4.883mV $ beträgt. Da allerdings bei der Messung ein
+Die 10--Bit--Auflösung des Mikrocontrollers bedeutet, dass die Schrittweite für die Digitalisierung
+der Eingangswerte $ 5 V / 2^{10} = 4,883 mV $ beträgt. Da allerdings bei der Messung ein
 Grundrauschen mit einer Breite von ca. XXXX V auftritt, ist die Genauigkeit der Messwerte geringer.
 
-Aus Gründen der Einfachheit - Atmel-Mikrocontroller mit USB-Schnittstelle sind nur als SMD-Chips
-verfügbar -, haben wir uns dazu entschlossen, ein Arduino-Mega-2560-Board zu nutzen, das einen
-ATmega2560-Mikrocontroller, einen ATmegaXXU2-Mikrocontroller als Serial-to-USB-Converter und eine
-3.3V-Spannungsquelle enthält. Das Programm für den ATmega2560, das die Messwerte von den
+Aus Gründen der Einfachheit --- Atmel--Mikrocontroller mit USB--Schnitt"-stel"-le sind nur als SMD--Chips
+verfügbar ---, haben wir uns dazu entschlossen, ein Arduino--Mega--2560--Board zu nutzen, das einen
+ATmega2560--Mikrocontroller, einen ATmegaXXU2--Mikrocontroller als Serial--to--USB--Converter und eine 
+3,3 V--Span"-nungs"-quel"-le enthält. Das Programm für den ATmega2560, das die Messwerte von den
 Analogeingängen liest und über eine serielle Schnittstelle an den ATmegaXXU2 weitergibt, haben
-wir aber selbst in C geschrieben, anstatt die Arduino-spezifische Sprache zu verwenden, die auf
+wir aber selbst in C geschrieben, anstatt die Arduino--spezifische Sprache zu verwenden, die auf
 einer höheren Ebene operiert, um möglichst gute Kontrolle über die Geschwindigkeit des Programms
 zu haben.
 
-Die Programmierung auf einer solch niedrigen Ebene und das Lesen der Mikrocontroller-Dokumentation
+Die Programmierung auf einer solch niedrigen Ebene und das Lesen der Mikrocontroller--Dokumentation
 haben gezeigt, dass 500000 Baud die ideale Datenübertragungsrate für die Kommunikation mit dem PC
 sind, da bei diesem Wert der Frequenzteiler für die serielle Datenübertragung genau 1 wird.
 Tests mit dem in C geschriebenen Programm für den Mikrocontroller haben gezeigt, dass bei
 dieser Baudrate die
-parallel zur seriellen Datenübertragung ablaufende Analog-Digital-Wandlung die langsamste
+parallel zur seriellen Datenübertragung ablaufende Analog--Digital--Wandlung die langsamste
 Komponente ist, weshalb es ohne Leistungseinbußen möglich ist, für die Übertragung
 der Messwerte an den PC ein Protokoll mit hoher Redundanz zu verwenden.
 
 Das Protokoll zwischen Mikrocontroller und PC überträgt Messwerte als Kombination aus
-Eingangs-ID und Messwert mit hoher Redundanz, sodass fehlerhafte oder
+Eingangs--ID und Messwert mit hoher Redundanz, sodass fehlerhafte oder
 unerwartete Werte abgefangen und
 ignoriert werden können. Solche fehlerhaften Werte sind zwar im laufenden Betrieb relativ selten,
 treten aber während der Initialisierung des Arduino häufig auf. Ein weiterer Zweck der
-mitgesendeten Eingangs-ID ist es, ohne bidirektionale Kommunikation eine Resynchronisation des
+mitgesendeten Eingangs--ID ist es, ohne bidirektionale Kommunikation eine Resynchronisation des
 Empfängerprogramms auf dem PC beispielsweise nach einem Neustart zu ermöglichen.
