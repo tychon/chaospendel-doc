@@ -1,14 +1,18 @@
 
-DOCS=Dokumentation.pdf Herleitung_standalone.pdf
+.PHONY: charts all clean
+
+DOCS := Dokumentation.pdf Herleitung_standalone.pdf
 
 # this is a phony target
 all: $(DOCS)
 
-%.pdf: %.tex charts/pendulumsketch.png
+charts:
+	make -C charts/
+
+%.pdf: %.tex charts
 	pdflatex $*.tex
 
-charts/pendulumsketch.png: ../network/data_pendulum
-	cd charts ;\
-	python generatesketch.py > pendulumsketch.svg ;\
-	convert -trim pendulumsketch.svg pendulumsketch.png
+clean:
+	make -C charts/ clean
+	rm -f *.pdf *.aux *.log
 
