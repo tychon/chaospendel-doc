@@ -1,3 +1,10 @@
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{charts/circuit_dia.png}
+  \caption{Schaltplan für das Modell}
+  \label{fig:circuit}
+\end{figure}
+
 Um das Verhalten des Doppelpendels zu beeinflussen, muss der Zustand des Pendels
 erfasst werden können. Zu diesem Zweck verwenden wir einen am Ende des Pendels
 befestigten Magneten, der in am Rahmen montierten Spulen elektrische Ströme
@@ -12,7 +19,6 @@ Auflösung von 10 Bit und leitet sie an einen Serial--to--USB--Konverter weiter.
 ist dadurch zwar relativ zur Grundspannung asymmetrisch --- der maximale negative Ausschlag beträgt
 theoretisch 3,3 V, während der maximale positive Ausschlag $ 5V - 3,3 V = 1.7 V $ beträgt ---, aber
 Spannungsregler für 3,3 V sind einfacher verfügbar als welche für 2,5 V.
-% zusätzliches argument: negative spitzen machen mist?
 
 Der Serial"=to"=USB"=Konverter ist per USB an einen Computer angeschlossen, der die 5V--Stromversorgung
 bereitstellt und die Messwerte aufzeichnen und verarbeiten kann.

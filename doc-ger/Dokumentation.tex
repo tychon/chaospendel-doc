@@ -24,6 +24,10 @@
 \newcommand{\mathematikstop}{\end{aligned}\end{equation*}}
 \renewcommand{\phi}{\varphi} % make "stroked" phi look "loopy"
 \renewcommand{\rho}{\varrho}
+\newcommand{\half}{\frac{1}{2}} % 1/2
+\newcommand{\phid}{\dot{\phi}}  % phi with one dot
+\newcommand{\intend}{\,\mathrm{d}} % end of integral
+\newcommand{\EQU}{\qquad\bigg|\,} % separator for explanations for equivalent rearrangements
 
 %\clubpenalty = 10000
 %\widowpenalty = 10000
@@ -42,17 +46,40 @@ Hierzu wollen wir zunächst ein Doppelpendel konstruieren, bei dem Daten über d
 \end{abstract}
 
 \newpage
+\tableofcontents
+
+\newpage
+
+\section{Einleitung}
+
+\section{Simulation}
+\subsection{Mathematischer Hintergrund}
+
+\mathematik
+\phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
+\phid_2 &= \frac{k_1 p_2 + l1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
+\dot{p}_1 &= -l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_2 sin \phi_1 - g l_1 k_3 sin \phi_1 \\[0.5\baselineskip]
+\dot{p}_2 &= l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_5 sin \phi_2 \\[0.5\baselineskip]
+\mathematikstop
+\mathematik
+k_1 &= \int^{l_{1b}}_{l_{1a}} \rho_1(r) \; r^2 \intend r
+\qquad && k_2 &= \int^{l_{1b}}_{l_{1a}} \rho_1(r) \; r \intend r \\
+k_3 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \intend r
+&& k_4 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \; r^2 \intend r \\
+k_5 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \; r \intend r \\
+\mathematikstop
+
+\subsection{Software}
 
 \section{Der Aufbau des Modells}
+
 \begin{figure}
   \includegraphics[width=\textwidth]{charts/pendulumsketch.png}
   \caption{Position der Spulen in Polarkoordinaten}
   \label{fig:pendulumsketch}
 \end{figure}
-\subsection{Schaltplan}
 
-\section{Mathematischer Hintergrund}
-\subsection{Differentialgleichungen}
+\input{Erfassung.tex}
 
 \section{Messwertverarbeitung}
 \begin{figure}
@@ -66,8 +93,6 @@ Hierzu wollen wir zunächst ein Doppelpendel konstruieren, bei dem Daten über d
 %\input{Herleitung.tex}
 
 \newpage
-\section{Messwerterfassung}
-\input{Erfassung.tex}
 
 \end{document}
 
