@@ -15,6 +15,7 @@
   \cfoot{\thepage}
   \rfoot{}
 
+\usepackage[numbers]{natbib}
 \usepackage{setspace}
   \onehalfspacing % Zeilenabstand
 % \usepackage[numbers]{natbib} % bibliography
@@ -54,7 +55,7 @@ Hierzu wollen wir zunächst ein Doppelpendel konstruieren, bei dem Daten über d
 
 \section{Simulation}
 \subsection{Mathematischer Hintergrund}
-
+Ein Großteil der Differentialgleichungen ist von der Wikipedia. \citet{wikidoublependulum} Wir haben sie nur durch die Konstanten $k_1$ bis $k_5$ erweitert, um sie allgemeiner zu halten.
 \mathematik
 \phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
 \phid_2 &= \frac{k_1 p_2 + l1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
@@ -88,11 +89,10 @@ k_5 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \; r \intend r \\
   \label{fig:network}
 \end{figure}
 
-%\newpage
-%\section{Herleitung der Differentialgleichungen}
-%\input{Herleitung.tex}
-
-\newpage
+\clearpage
+\addcontentsline{toc}{section}{Literatur}
+\bibliographystyle{alphadin}
+\bibliography{bibliography}{}
 
 \end{document}
 
