@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ngerman, lmodern}
+%\usepackage[left=3cm, right=3cm]{geometry}
 
 \newcommand{\mytitle}{Untersuchung und Kontrolle von chaotischem Verhalten am Doppelpendel}
 \newcommand{\myauthor}{Jann Horn und Hannes Riechert}
@@ -47,15 +48,34 @@ Hierzu wollen wir zunächst ein Doppelpendel konstruieren, bei dem Daten über d
 \end{abstract}
 
 \newpage
+\pagestyle{fancy}
 \tableofcontents
 
 \newpage
 
 \section{Einleitung}
+Als erstes haben wir an den mathematisch genauen Schwingungsdifferenzialgleichungen für das Doppelpendel gearbeitet.
+Und eine vollkommen theoretische Simulation von einem Doppelpendel realisiert.
+
+Erst danach haben wir mit der Konstruktion des Modells, das in Abbildung (\TODO ref) zu sehen ist begonnen.
 
 \section{Simulation}
+
 \subsection{Mathematischer Hintergrund}
-Ein Großteil der Differentialgleichungen ist von der Wikipedia. \citet{wikidoublependulum} Wir haben sie nur durch die Konstanten $k_1$ bis $k_5$ erweitert, um sie allgemeiner zu halten.
+Der Lösungsansatz über die Euler"=Lagrange Gleichung ist von der englischen Wikipedia übernommen worden. \citep{wikidoublependulum}
+
+Die Gleichungen wurden nur um die Konstanten $k_1$ bis $k_5$ erweitert, um sie an unser Pendel anpassen zu können, das keine gleichmäßige Massenverteilung aufweist.
+
+(\TODO wo ist die vollständige Herleitung?)
+
+Die Position der Pendelarme kann durch die zwei generalisierten Koordinaten $\phi_1$ und $\phi_2$ beschrieben werden, die die Winkel der Arme angeben.
+Für die vollständige Angabe des Zustands des Systems ist zusätzlich noch der generalisierte Impuls hier als $p_1$ und $p_2$ bezeichnet, vonnöten.
+
+Aus den Funktionen $\dot{p}_1$, $\dot{p}_2$, $\phid_1$ und $\phid_2$ setzt sich das System von Differentialgleichungen zusammen, mit denen aus dem aktuellen Zustand der Zustand des Systems zu jeder gegebenen Zeit berechnen lässt.
+Die Berechnung kann zum Beispiel Iterativ mit dem Runge"=Kutta"=Verfahren erfolgen.
+
+(\TODO bild um variablen zu erklären)
+
 \mathematik
 \phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
 \phid_2 &= \frac{k_1 p_2 + l1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
