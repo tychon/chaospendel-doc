@@ -2,7 +2,7 @@
 .PHONY: charts all clean
 
 DOCS := Dokumentation.pdf Herleitung_standalone.pdf
-SECDOCS := Simulation.tex Erfassung.tex
+SECDOCS := Simulation.tex Modell.tex
 BIBL := Dokumentation.bbl
 
 # this is a phony target
