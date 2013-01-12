@@ -13,6 +13,7 @@ charts:
 	make -C charts/
 
 %.bbl: %.bib
+	rm -f $*.bbl
 	pdflatex $*.tex # generate cite data in .aux file
 	bibtex $*       # run bibtex to generate .bbl from .bib file
 
