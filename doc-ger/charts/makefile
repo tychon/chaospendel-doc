@@ -1,7 +1,7 @@
 
 .PHONY: all clean
 
-all: pendulumsketch.png circuit_dia.png network_dia.png
+all: pendulumsketch.png circuit_dia.png network_dia.png mathsketch_dia.png
 
 %_dia.png: %.dia
 	dia -e $*_dia.png $*.dia
