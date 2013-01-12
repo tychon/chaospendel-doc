@@ -1,13 +1,24 @@
 
-Das Modell ist in Abbildung \TODO zu sehen.
+\section{Der Aufbau des Modells}
+Das fertige Modell ist in Abbildung \TODO zu sehen.
+Das eigentliche Pendel ist an einer Dreieckskonstruktion aus Aluminiumprofilen befestigt.
+Die breite Grundfläche sichert den Stand des Pendels seitlich, da in die Richtungen oft große Kräfte wirken.
+Falls die Konstruktion dann verrutschen oder kippen sollte, ginge ein Teil der Energie aus dem System verloren und die Vorhersage würde beeinträchtigt werden.
 
-\begin{figure}
+(\TODO Pendelmaße)
+
+Auf der Rückseite des Aufbaus ist eine Holzplatte angebracht, auf der 17 Messspulen befestigt sind, deren Konfiguration in Abbildung \ref{fig:pendulumsketch} zu sehen ist.
+Dort sind Spulen mit einer Windungszahl von 1600 Windungen rot und Spulen mit 20.000 Windungen grün markiert.
+
+Im Schaltplan in Abbildung \ref{fig:circuit} ist zu sehen, wie die Spulen an den Arduino angeschlossen werden. Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $3,\.3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben.
+
+\begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/pendulumsketch.png}
   \caption{Position der Messspulen in Polarkoordinaten}
   \label{fig:pendulumsketch}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/circuit_dia.png}
   \caption{Schaltplan für das Modell}
   \label{fig:circuit}
