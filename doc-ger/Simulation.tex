@@ -28,9 +28,6 @@ $l_{2a}$ und $l_{2b}$ geben die beiden Längen des zweiten Pendelarms relativ zu
 
 Diese Längenangaben sind in den Konstanten $k_1$ bis $k_5$ wiederzufinden, die darauf abzielen, die Eigenschaften des Pendels so genau wie möglich beschreiben zu können, indem zwei Dichtefunktionen $\rho(r)$ über den Abstand $r$ von der jeweiligen Achse für die beiden Pendelarme angegeben werden.
 
-(\TODO soll das hier wirklich stehen? hmm, eher nicht, denke ich) Aus Gründen der Praktikabilität wollen wir diese Konstanten nicht
-durch Längenmessungen am Pendel ermitteln, sondern kalibrieren.
-
 Die Differentialgleichungen lauten wie folgt:
 \mathematik
 \phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
@@ -65,7 +62,7 @@ Wir haben in Haskell eine Simulation geschrieben, die das klassische Runge"=Kutt
 
 Die Simulation generiert eine CSV-Datei, in die in regelmäßigen Zeitintervallen die Winkel und die verschiedenen Energien geschrieben werden.
 Auf die Winkel wird danach die diskrete Fourier"=Transformation mit einem sich bewegenden Fenster angewendet, um Perioden in der Bewegung erkennen zu können.
-Nachdem die Winkel und ihre Fourier"=Transformation (\TODO Plural?) berechnet sind, werden die Daten angezeigt.
+Nachdem die Winkel und ihre Transformationen berechnet sind, werden die Daten angezeigt.
 In Abbildung \ref{fig:hssim} ist ein Screenshot der Anzeige zu sehen.
 
 \begin{figure}[bht]

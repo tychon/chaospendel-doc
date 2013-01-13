@@ -39,7 +39,7 @@ erfasst werden können. Zu diesem Zweck verwenden wir einen am Ende des Pendels
 befestigten Magneten, der in am Rahmen montierten Spulen elektrische Ströme
 hervorruft, wenn er an diesen vorbeibewegt wird.
 
-Diese Ströme verursachen Spannungsschwankungen an den Spulen. Um diese zu messen,
+Diese Ströme verursachen Spannungsschwankungen an den Spulen. (\TODO das steht auch schon weiter oben: )Um diese zu messen,
 verbinden wir alle Spulen auf einer Seite mit einer 3,3 V"=Spannungsquelle und auf der
 anderen mit den 16 Analogeingängen eines ATmega2560"=Mikrocontrollers. Der auf einen
 Messbereich von 0 bis 5V eingestellte Mikrocontroller iteriert dann in einer Endlosschleife
@@ -122,19 +122,45 @@ So kann später erkannt werden, ob Messwerte signifikant außerhalb des Rauschen
 Der \app{Rangetester} zeigt zu jeder Spule den aktuellen Messwert an.
 Wir haben ihn benutzt, um den besten Widerstandswert für die Spulen mit 20.000 Windungen zu finden.
 Hier kann auch die Auswirkung der Arbeitsspulen auf die Messpulen beobachtet werden.
-\TODO bilder
+
+In Abbildung \ref{fig:screenrangetester} ist ein Screenshot der Anzeige zu sehen.
+Blau ist der Bereich markiert, in dem das Rauschen liegt.
+Die grünen Balken zeigen den aktuellen Wert relativ zum Durchschnittswert an und die roten Striche sind bei den Minima und Maxima der Spulen seitdem das Programm gestart wurde.
 
 \subsubsection{Tracker}
-\begin{figure}
+Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{ArduinoReader} zu normalisieren und berechnet die magnetische Flussdichte zu jeder Spule.
+
+Um einen Messwert $x$ zu normalisieren, wird als erstes der Durchschnittswert $\mu$ abgezogen und dann durch die Anzahl der Windungen $n$ geteilt.
+Das Ergebnis daraus wird mit dem Verhältnis von Eigenwiderstand der Spule $R_S$ mit dem Widerstandswert $R_P$ des parallel geschalteten Widerstands multipliziert: (\TODO ist herr hannibal damit einverstanden?)
+
+\mathematik
+norm = \frac{x - \mu}{n} \cdot \frac{R_S}{R_P}
+\mathematikstop
+
+Der normalisierte Wert $norm$ ist jetzt für alle Spulen vergleichbar.
+Aus ihm wird jetzt ein Integral berechnet, dass als magnetische Flussdichte interpretiert werden kann.
+Da die Messdaten ein Rauschen enthalten und der Analog"=Digital"=Wandler nicht perfekt linear arbeitet, konvergiert die Summmer aller normalisierten Daten einer Spule schnell in den stark positiven oder stark negativen  Bereich.
+Um diese Konvergenz zu beherrschen werden die Integrale auf 0 zurückgesetzt, wenn in 50  aufeinanderfolgenden Datensätzen kein Messwert außerhalb des Rauschens lag.
+Sie werden auch zurückgesetzt, wenn ihr Wert kleiner 0 wird.
+
+\begin{figure}[hbt]
   \centering
   \includegraphics[width=\textwidth]{images/tracker.png}
   \caption{Screenshot vom \app{Tracker}}
   \label{fig:screentracker}
 \end{figure}
-Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{ArduinoReader} zu normalisieren.
+In Abbildung \ref{fig:screentracker} ist ein Screenshot von der Anzeige des \app{Tracker}s zu sehen.
+Sie zeigt die Integrale als unterschiedlich große grüne Kreise um die Position der Spulen.
+Es ist zu erkennen, dass nur eine Spule ein Integral größer 0 hat, und in dessen Nähe befindet sich der Magnet.
+
+Neben der Normalisierung sortiert der \app{Tracker} alle Datensätze aus, die verfälscht sein könnten.
+Falsch ist zum Beispiel ein Datensatz, der einen Messwert enthält der gleich 0 oder 1023 ist. In dem Fall kann es sein, dass die Spannung an einer Spule so groß ist, dass der Analog"=Digital"=Wandler für die nächsten Messungen falsche Werte liefert und der gesamte Datensatz falsch ist.
+
+Es werden auch Datensätze verworfen, bei denen mehrere Spulen Messwerte außerhalb des Rauschens anzeigen.
+Dann ist nämlich wahrscheinlich eine Arbeitsspule umgeschaltet worden, die alle Messpulen beeinflusst.
 
 \subsubsection{Vorhersage}
-\begin{figure}
+\begin{figure}[hbt]
   \centering
   \includegraphics[width=\textwidth]{images/prediction.png}
   \caption{Screenshot von der \app{MarkovPrediction}}
