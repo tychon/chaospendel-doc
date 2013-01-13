@@ -62,13 +62,13 @@ bereitstellt und die Messwerte aufzeichnen und verarbeiten kann.
 
 Die 10"=Bit"=Auflösung des Mikrocontrollers bedeutet, dass die Schrittweite für die Digitalisierung
 der Eingangswerte $ 5 V / 2^{10} = 4,883 mV $ beträgt. Da allerdings bei der Messung ein
-Grundrauschen mit einer Breite von ca. \TODO XXXX V auftritt, ist die Genauigkeit der Messwerte geringer.
+Grundrauschen mit einer Breite von ca. 50mV auftritt, ist die Genauigkeit der Messwerte geringer.
 
 Aus Gründen der Einfachheit --- Atmel--Mikrocontroller mit USB"=Schnittstelle sind nur als SMD--Chips
 verfügbar ---, haben wir uns dazu entschlossen, ein Arduino"=Mega"=2560"=Board zu nutzen, das einen
-ATmega2560"=Mikrocontroller, einen \TODO ATmegaXXU2"=Mikrocontroller als Serial"=to"=USB"=Converter und eine 
+ATmega2560"=Mikrocontroller, einen weiteren ATmega"=Mikrocontroller mit USB als Serial"=to"=USB"=Converter und eine 
 3,3 V"=Spannungsquelle enthält. Das Programm für den ATmega2560, das die Messwerte von den
-Analogeingängen liest und über eine serielle Schnittstelle an den \TODO ATmegaXXU2 weitergibt, haben
+Analogeingängen liest und über eine serielle Schnittstelle an den Microcontroller mit USB weitergibt, haben
 wir aber selbst in C geschrieben, anstatt die Arduino--spezifische Sprache zu verwenden, die auf
 einer höheren Ebene operiert, um möglichst gute Kontrolle über die Geschwindigkeit des Programms
 zu haben.
