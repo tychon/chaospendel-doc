@@ -206,19 +206,19 @@ Diese Information wird in eine Zahl codiert, wobei die Geschwindigkeit zuvor in 
 
 In Abbildung \ref{fig:screenmarkov} ist ein Zustand zu sehen.
 Die drei letzten Spulen sind grün markiert und haben die Indizes 14, 15, 7 (der älteste zuerst, die Indizes der Spulen können auch in Abbildung \ref{fig:pendulumsketch} auf Seite \pageref{fig:pendulumsketch} nachgesehen werden).
-Die Geschwindigkeit des Pendels beträgt $0,8 m/s$ und wird bei fünf Geschwindigkeitsbereichen und einer Maximalgeschwindigkeit von $1.5 m/s$ in den Bereich mit dem Index zwei eingeordnet:
+Die Geschwindigkeit des Pendels beträgt $0,8 m/s$ und wird bei fünf Geschwindigkeitsbereichen und einer Maximalgeschwindigkeit von $1,5 m/s$ in den Bereich mit dem Index zwei eingeordnet:
 \mathematik
-\textbf{2}\cdot\frac{1.5 m/s}{5} < 0.8 m/s < 3\cdot\frac{1.5 m/s}{5}
+\textbf{2}\cdot\frac{1,5 m/s}{5} < 0,8 m/s < 3\cdot\frac{1,5 m/s}{5}
 \mathematikstop
 
-Alle Geschwindigkeiten größer $1.5 m/s$ werden im obersten Bereich mit dem Index 4 eingeordnet.
+Alle Geschwindigkeiten größer $1,5 m/s$ werden im obersten Bereich mit dem Index 4 eingeordnet.
 Der codierte Index des Zustands ist nun:
 \mathematik
 2 \cdot 16^3 + 14 \cdot 16^2 + 15 \cdot 16 + 7 = 12023
 \mathematikstop
 
 Dieser codierte Index repräsentiert den aktuellen Zustand und stellt den Index in der Übergangsmatrix dar, an dem Wahrscheinlichkeiten für den nächsten Zustand gespeichert werden.
-Der wahrscheinlichste nächste Zustand hat den Code 8049, also wird wahrscheinlich die Spule mit einer Geschwindigkeit zwischen $0.3 m/s$ und $0.6 m/s$ an der Spule mit dem Index eins vorbeikommen.
+Der wahrscheinlichste nächste Zustand hat den Code 8049, also wird wahrscheinlich die Spule mit einer Geschwindigkeit zwischen $0,3 m/s$ und $0,6 m/s$ an der Spule mit dem Index eins vorbeikommen.
 Dies ist auch in der Abbildung als blauer Pfad zu erkennen.
 
 Da es so $16^3 \cdot 5 = 20480$ verschiedene codierte Zustände gibt, ist die Übergangsmatrix relativ groß.
