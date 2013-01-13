@@ -1,6 +1,13 @@
 
 \section{Der Aufbau des Modells}
-Das fertige Modell ist in Abbildung \TODO zu sehen.
+
+\begin{figure}[bht]
+  \includegraphics[width=\textwidth]{images/real_front.jpg}
+  \caption{Vorderseite des Aufbaus}
+  \label{fig:front}
+\end{figure}
+
+Das fertige Modell ist in Abbildung \ref{fig:front} zu sehen.
 Das eigentliche Pendel ist an einer Dreieckskonstruktion aus Aluminiumprofilen befestigt.
 Die breite Grundfläche sichert den Stand des Pendels seitlich, da in die Richtungen oft große Kräfte wirken.
 Falls die Konstruktion dann verrutschen oder kippen sollte, ginge ein Teil der Energie aus dem System verloren und die Vorhersage würde beeinträchtigt werden.
@@ -21,9 +28,9 @@ Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spu
 außerhalb des Messbereichs erzeugen, was die Messelektronik durcheinander brächte.
 
 Die zwei Arbeitsspulen $S_{16}$ und $S_{17}$ sind direkt gegenüber der untersten beiden Messspulen angebracht und haben jeweils 300 Windungen.
-Sie sind für vier Ampere Strom ausgelegt, der über \TODO ?Relais ? MOSFET? geschaltet wird.
+Sie sind für vier Ampere Strom ausgelegt, der über NMOS-Transistoren geschaltet wird.
 Weil unsere Spannungsquelle für einen Ampere bei $24 V$ ausgelegt ist, haben wir einen Vorwiderstand von $R_{16} = 22 k\Omega$ in Reihe zu den Spulen geschaltet und so den Strom begrenzt.
-Zusätzlich ist zu jeder Arbeistspule eine LED mit Vorwiderstand $R_{17} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist. In Abbildung \TODO sind oben die \TODO MOSFETs? und LEDs auf dem Steckboard zu erkennen.
+Zusätzlich ist zu jeder Arbeistspule eine LED mit Vorwiderstand $R_{17} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist.
 
 \begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/circuit_dia.png}
