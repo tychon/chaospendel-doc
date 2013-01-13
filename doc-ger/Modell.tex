@@ -24,7 +24,6 @@ Sie sind für vier Ampere Strom ausgelegt, der über \TODO ?Relais ? MOSFET? ges
 Weil unsere Spannungsquelle für einen Ampere bei $24 V$ ausgelegt ist, haben wir einen Vorwiderstand von $R16 = 22 k\Omega$ in Reihe zu den Spulen geschaltet und so den Strom begrenzt.
 Zusätzlich ist zu jeder Arbeistspule eine LED mit Vorwiderstand $R_{17} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist. In Abbildung \TODO sind oben die \TODO MOSFETs? und LEDs auf dem Steckboard zu erkennen.
 
-
 \begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/circuit_dia.png}
   \caption{Schaltplan für das Modell}
@@ -89,4 +88,55 @@ Empfängerprogramms auf dem PC beispielsweise nach einem Neustart zu ermögliche
   \includegraphics[width=\textwidth]{charts/network_dia.png}
   \caption{Flussdiagramm der Messdaten}
   \label{fig:network}
+\end{figure}
+
+Wir haben ein System aus Tools programmiert, die Informationen untereinander austauschen können und jedes Programm erfüllt einen bestimmten Zweck.
+Im Flussdiagramm in Abbildung \ref{fig:network} ist zu erkennen, welche Daten ausgetauscht werden.
+Die durchgezogenen Pfeile sind Unix Domain Sockets, die gestrichelten Linien sind Dateien, die beim Programmstart geladen werden.
+
+\subsubsection{ArduinoReader}
+Der \app{ArduinoReader} verbindet sich über eine serielle Schnittstelle mit dem Arduino und ließt die Daten aus, die der Arduino gemessen hat.
+Die Datensätze werden mit einem Zeitstempel versehen und über ein Unix Domain Socket an andere Programme weiter gesendet und in der Datei \app{ReplayFile} gespeichert.
+Ein Datensatz besteht aus 16 Zahlen im Bereich von 0 bis 1023, die die Messwerte für jede Spule angeben.
+Der Bereich diser Zahl wird von der 10"=Bit"=Genauigkeit des Analog"=Digital"=Wandlers vorgegeben.
+Außerdem können Kommandos zum Schalten der digitalen Ausgänge an den \app{ArduinoReader} gesendet werden, die dann an den Arduino weitergeleitet werden.
+
+\subsubsection{Replayer}
+Anstatt des \app{ArduinoReader}s kann der \app{Replayer} eingesetzt werden, der vom \app{ArduinoReader} aufgezeichnete Daten abspielt.
+So können mehrere Analysen von gleichen Daten gemacht werden, oder gearbeitet werden, ohne dass ein Arduino angeschlossen ist.
+
+\subsubsection{Normalisation}
+Die \app{Normalisation} liest die Daten des \app{ArduinoReader}s und berechnet für jede Spule separat Durchschnittswerte und Standardabweichung.
+Zusätzlich werden noch der größte und der kleinste gemessene Wert aufgezeichnet, die das Rauschen eingrenzen.
+Die Ergebnisse werden in die Datei \app{NoiseInfo} geschrieben.
+
+Dieses Programm wird ausgeführt, wenn sich das Pendel nicht bewegt.
+So kann später erkannt werden, ob Messwerte signifikant außerhalb des Rauschens liegen, und es können auch die Messwerte verschiedener Spulen verglichen werden.
+
+\subsubsection{Rangetester}
+\begin{wrapfigure}{r}{5cm}
+  \includegraphics[width=0.48\textwidth]{images/rangetester.png}
+  \caption{Screenshot vom \app{Rangetester}}
+  \label{fig:screenrangetester}
+\end{wrapfigure}
+Der \app{Rangetester} zeigt zu jeder Spule den aktuellen Messwert an.
+Wir haben ihn benutzt, um den besten Widerstandswert für die Spulen mit 20.000 Windungen zu finden.
+Hier kann auch die Auswirkung der Arbeitsspulen auf die Messpulen beobachtet werden.
+\TODO bilder
+
+\subsubsection{Tracker}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{images/tracker.png}
+  \caption{Screenshot vom \app{Tracker}}
+  \label{fig:screentracker}
+\end{figure}
+Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{ArduinoReader} zu normalisieren.
+
+\subsubsection{Vorhersage}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{images/prediction.png}
+  \caption{Screenshot von der \app{MarkovPrediction}}
+  \label{fig:screenmarkov}
 \end{figure}
