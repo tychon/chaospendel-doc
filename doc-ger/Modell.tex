@@ -7,16 +7,23 @@ Falls die Konstruktion dann verrutschen oder kippen sollte, ginge ein Teil der E
 
 (\TODO Pendelmaße)
 
-Auf der Rückseite des Aufbaus ist eine Holzplatte angebracht, auf der 17 Messspulen befestigt sind, deren Konfiguration in Abbildung \ref{fig:pendulumsketch} zu sehen ist.
-Dort sind Spulen mit einer Windungszahl von 1600 Windungen rot und Spulen mit 20.000 Windungen grün markiert.
-
-Im Schaltplan in Abbildung \ref{fig:circuit} ist zu sehen, wie die Spulen an den Arduino angeschlossen werden. Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben.
-
 \begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/pendulumsketch.png}
   \caption{Position der Messspulen in Polarkoordinaten}
   \label{fig:pendulumsketch}
 \end{figure}
+
+Auf der Rückseite des Aufbaus ist eine Holzplatte angebracht, auf der 17 Messspulen befestigt sind, deren Konfiguration in Abbildung \ref{fig:pendulumsketch} zu sehen ist.
+Dort sind Spulen mit einer Windungszahl von 1600 Windungen rot und Spulen mit 20.000 Windungen grün markiert.
+
+Im Schaltplan in Abbildung \ref{fig:circuit} ist zu sehen, wie die Messspulen $S_0$ bis $S_{15}$ an die analogen Eingänge des Arduino angeschlossen werden.
+Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $R_0 = 3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben.
+
+Die zwei Arbeitsspulen $S16$ sind direkt gegenüber der untersten beiden Messspulen angebracht und haben jeweils 300 Windungen.
+Sie sind für vier Ampere Strom ausgelegt, der über \TODO ?Relais ? MOSFET? geschaltet wird.
+Weil unsere Spannungsquelle für einen Ampere bei $24 V$ ausgelegt ist, haben wir einen Vorwiderstand von $R16 = 22 k\Omega$ in Reihe zu den Spulen geschaltet und so den Strom begrenzt.
+Zusätzlich ist zu jeder Arbeistspule eine LED mit Vorwiderstand $R_{17} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist. In Abbildung \TODO sind oben die \TODO MOSFETs? und LEDs auf dem Steckboard zu erkennen.
+
 
 \begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/circuit_dia.png}
@@ -25,11 +32,8 @@ Im Schaltplan in Abbildung \ref{fig:circuit} ist zu sehen, wie die Spulen an den
 \end{figure}
 
 \section{Messwertverarbeitung}
-\begin{figure}
-  \includegraphics[width=\textwidth]{charts/network_dia.png}
-  \caption{Flussdiagramm der Messdaten}
-  \label{fig:network}
-\end{figure}
+
+\subsection{Im Arduino}
 
 Um das Verhalten des Doppelpendels zu beeinflussen, muss der Zustand des Pendels
 erfasst werden können. Zu diesem Zweck verwenden wir einen am Ende des Pendels
@@ -51,13 +55,13 @@ bereitstellt und die Messwerte aufzeichnen und verarbeiten kann.
 
 Die 10"=Bit"=Auflösung des Mikrocontrollers bedeutet, dass die Schrittweite für die Digitalisierung
 der Eingangswerte $ 5 V / 2^{10} = 4,883 mV $ beträgt. Da allerdings bei der Messung ein
-Grundrauschen mit einer Breite von ca. XXXX V auftritt, ist die Genauigkeit der Messwerte geringer.
+Grundrauschen mit einer Breite von ca. \TODO XXXX V auftritt, ist die Genauigkeit der Messwerte geringer.
 
 Aus Gründen der Einfachheit --- Atmel--Mikrocontroller mit USB"=Schnittstelle sind nur als SMD--Chips
 verfügbar ---, haben wir uns dazu entschlossen, ein Arduino"=Mega"=2560"=Board zu nutzen, das einen
-ATmega2560"=Mikrocontroller, einen ATmegaXXU2"=Mikrocontroller als Serial"=to"=USB"=Converter und eine 
+ATmega2560"=Mikrocontroller, einen \TODO ATmegaXXU2"=Mikrocontroller als Serial"=to"=USB"=Converter und eine 
 3,3 V"=Spannungsquelle enthält. Das Programm für den ATmega2560, das die Messwerte von den
-Analogeingängen liest und über eine serielle Schnittstelle an den ATmegaXXU2 weitergibt, haben
+Analogeingängen liest und über eine serielle Schnittstelle an den \TODO ATmegaXXU2 weitergibt, haben
 wir aber selbst in C geschrieben, anstatt die Arduino--spezifische Sprache zu verwenden, die auf
 einer höheren Ebene operiert, um möglichst gute Kontrolle über die Geschwindigkeit des Programms
 zu haben.
@@ -78,3 +82,11 @@ ignoriert werden können. Solche fehlerhaften Werte sind zwar im laufenden Betri
 treten aber während der Initialisierung des Arduino häufig auf. Ein weiterer Zweck der
 mitgesendeten Eingangs"=ID ist es, ohne bidirektionale Kommunikation eine Resynchronisation des
 Empfängerprogramms auf dem PC beispielsweise nach einem Neustart zu ermöglichen.
+
+\subsection{Auf dem Computer}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{charts/network_dia.png}
+  \caption{Flussdiagramm der Messdaten}
+  \label{fig:network}
+\end{figure}
