@@ -19,12 +19,10 @@
   \label{fig:aufbau}
 \end{figure}
 
-Das fertige Modell ist in Abbildung \ref{fig:front} zu sehen.
+Das fertige Modell ist in Abbildung \ref{fig:aufbau} zu sehen.
 Das eigentliche Pendel ist an einer Dreieckskonstruktion aus Aluminiumprofilen befestigt.
 Die breite Grundfläche sichert den Stand des Pendels seitlich, da in die Richtungen oft große Kräfte wirken.
 Falls die Konstruktion dann verrutschen oder kippen sollte, ginge ein Teil der Energie aus dem System verloren und die Vorhersage würde beeinträchtigt werden.
-
-(\TODO Pendelmaße)
 
 \begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/pendulumsketch.png}
@@ -114,6 +112,12 @@ Wir haben ein System aus Tools programmiert, die Informationen untereinander aus
 Im Flussdiagramm in Abbildung \ref{fig:network} ist zu erkennen, welche Daten ausgetauscht werden.
 Die durchgezogenen Pfeile sind Unix Domain Sockets, die gestrichelten Linien sind Dateien, die beim Programmstart geladen werden.
 
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \includegraphics[width=0.4\textwidth]{images/rangetester.png}
+  \caption{Screenshot vom \app{Rangetester}}
+  \label{fig:screenrangetester}
+\end{wrapfigure}
+
 \subsubsection{ArduinoReader}
 Der \app{ArduinoReader} verbindet sich über eine serielle Schnittstelle mit dem Arduino und liest die Daten aus, die der Arduino gemessen hat.
 Die Datensätze werden mit einem Zeitstempel versehen und über einen Unix Domain Socket sowohl an andere Programme weiter gesendet als auch in der Datei \app{ReplayFile} gespeichert.
@@ -122,7 +126,7 @@ Der Bereich diser Zahl wird von der 10"=Bit"=Genauigkeit des Analog"=Digital"=Wa
 Außerdem können Kommandos zum Schalten der digitalen Ausgänge an den \app{ArduinoReader} gesendet werden, die dann an den Arduino weitergeleitet werden.
 
 \subsubsection{Replayer}
-Anstatt des \app{ArduinoReader}s kann der \app{Replayer} eingesetzt werden, der vom \app{ArduinoReader} aufgezeichnete Daten abspielt.
+Anstatt des \app{Arduino"-Reader}s kann der \app{Re"-play"-er} eingesetzt werden, der vom \app{Arduino"-Reader} aufgezeichnete Daten abspielt.
 So können mehrere Analysen von gleichen Daten gemacht werden, oder es kann gearbeitet werden, ohne dass ein Arduino angeschlossen ist.
 
 \subsubsection{Normalisation}
@@ -134,11 +138,6 @@ Dieses Programm wird ausgeführt, wenn sich das Pendel nicht bewegt.
 So kann später erkannt werden, ob Messwerte signifikant außerhalb des Rauschens liegen, und es können auch die Messwerte verschiedener Spulen verglichen werden.
 
 \subsubsection{Rangetester}
-\begin{wrapfigure}{r}{5cm}
-  \includegraphics[width=0.48\textwidth]{images/rangetester.png}
-  \caption{Screenshot vom \app{Rangetester}}
-  \label{fig:screenrangetester}
-\end{wrapfigure}
 Der \app{Rangetester} zeigt zu jeder Spule den aktuellen Messwert an.
 Wir haben ihn benutzt, um den besten Widerstandswert für die Spulen mit 20.000 Windungen zu finden.
 Hier kann auch die Auswirkung der Arbeitsspulen auf die Messpulen beobachtet werden.
