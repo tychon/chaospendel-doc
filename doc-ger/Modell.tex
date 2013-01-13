@@ -183,7 +183,7 @@ Diese Information wird in eine Zahl codiert, wobei die Geschwindigkeit zuvor in 
 \end{figure}
 
 In Abbildung \ref{fig:screenmarkov} ist ein Zustand zu sehen.
-Die drei letzten Spulen sind grün markiert und haben die Indizes 14, 15, 7 (der älteste zuerst).
+Die drei letzten Spulen sind grün markiert und haben die Indizes 14, 15, 7 (der älteste zuerst, die Indices der Spulen können auch in Abbildung \ref{fig:pendulumsketch} auf Seite \pageref{fig:pendulumsketch} nachgesehen werden).
 Die Geschwindigkeit des Pendels beträgt $0,8 m/s$ und wird bei fünf Geschwindigkeitsbereichen und einer Maximalgeschwindigkeit von $1.5 m/s$ in den Bereich mit dem Index zwei eingeordnet:
 \mathematik
 \textbf{2}\cdot\frac{1.5 m/s}{5} < 0.8 m/s < 3\cdot\frac{1.5 m/s}{5}
@@ -196,7 +196,11 @@ Der codierte Index des Zustands ist nun:
 \mathematikstop
 
 Dieser codierte Index repräsentiert den aktuellen Zustand und stellt den Index in der Übergangsmatrix dar, an dem Wahrscheinlichkeiten für den nächsten Zustand gespeichert werden.
-Der wahrscheinlichste nächste Zustand hat den Code 8049, also wird wahrscheinlich die Spule mit einer Geschwindigkeit zwischen $0.3 m/s$ und $0.6 m/s$ an der Spule mit dem Index 1 vorbeikommen.
+Der wahrscheinlichste nächste Zustand hat den Code 8049, also wird wahrscheinlich die Spule mit einer Geschwindigkeit zwischen $0.3 m/s$ und $0.6 m/s$ an der Spule mit dem Index eins vorbeikommen.
 Dies ist auch in der Abbildung als blauer Pfad zu erkennen.
 
+Da es so $16^3 \cdot 5 = 20480$ verschiedene codierte Zustände gibt, ist die Übergangsmatrix relativ groß.
+Sie kann in einer Datei gespeichert werden, damit mehr Übergänge eingetragen werden können, nachdem das Programm neu gestartet wurde.
+
 \TODO manipulation?
+
