@@ -62,7 +62,7 @@ verbinden wir alle Spulen auf einer Seite mit einer 3,3 V"=Spannungsquelle und a
 anderen mit den 16 Analogeingängen eines ATmega2560"=Mikrocontrollers. Der auf einen
 Messbereich von 0 bis 5V eingestellte Mikrocontroller iteriert dann in einer Endlosschleife
 über alle Eingänge, misst die an ihnen momentan anliegenden Spannungen mit einer
-Auflösung von 10 Bit und leitet sie an einen Serial--to--USB--Konverter weiter. Der Messbereich
+Auflösung von 10 Bit und leitet sie an einen Serial"=to"=USB"=Konverter weiter. Der Messbereich
 ist dadurch zwar relativ zur Grundspannung asymmetrisch --- der maximale negative Ausschlag beträgt
 theoretisch 3,3 V, während der maximale positive Ausschlag $ 5V - 3,3 V = 1.7 V $ beträgt ---, aber
 Spannungsregler für 3,3 V sind einfacher verfügbar als welche für 2,5 V.
@@ -79,9 +79,9 @@ verfügbar ---, haben wir uns dazu entschlossen, ein Arduino"=Mega"=2560"=Board 
 ATmega2560"=Mikrocontroller, einen weiteren ATmega"=Mikrocontroller mit USB als Serial"=to"=USB"=Converter und eine 
 3,3 V"=Spannungsquelle enthält. Das Programm für den ATmega2560, das die Messwerte von den
 Analogeingängen liest und über eine serielle Schnittstelle an den Microcontroller mit USB weitergibt, haben
-wir aber selbst in C geschrieben, anstatt die Arduino--spezifische Sprache zu verwenden, die auf
-einer höheren Ebene operiert, um möglichst gute Kontrolle über die Geschwindigkeit des Programms
-zu haben.
+wir selbst in C geschrieben, um möglichst gute Kontrolle über die Geschwindigkeit des Programms
+zu haben, anstatt die Arduino"=spezifische Sprache zu verwenden, die auf
+einer höheren Ebene operiert.
 
 Die Programmierung auf einer solch niedrigen Ebene und das Lesen der Mikrocontroller"=Dokumentation
 haben gezeigt, dass 500000 Baud die ideale Datenübertragungsrate für die Kommunikation mit dem PC
@@ -171,7 +171,7 @@ Sie werden auch zurückgesetzt, wenn ihr Wert kleiner 0 wird.
 
 In Abbildung \ref{fig:screentracker} ist ein Screenshot von der Anzeige des \app{Tracker}s zu sehen.
 Sie zeigt die Integrale als unterschiedlich große grüne Kreise um die Position der Spulen.
-Es ist zu erkennen, dass nur eine Spule ein Integral größer 0 hat, und in deren Nähe befindet sich der Magnet.
+Es ist zu erkennen, dass nur die Spule $S_{13}$ ein Integral größer 0 hat, und in deren Nähe befindet sich der Magnet.
 
 Neben der Normalisierung sortiert der \app{Tracker} alle Datensätze aus, die verfälscht sein könnten.
 Falsch ist zum Beispiel ein Datensatz, der einen Messwert enthält, der gleich 0 oder 1023 ist. In dem Fall kann es sein, dass die Spannung an einer Spule so groß ist, dass der Analog"=Digital"=Wandler für die nächsten Messungen falsche Werte liefert und der gesamte Datensatz falsch ist.

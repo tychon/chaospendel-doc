@@ -64,7 +64,7 @@ for (r, a, c) in zip(radius, angles, coils):
   if c > 10000: print '<circle cx="'+str(xpos)+'" cy="'+str(ypos)+'" r="'+str(solradius)+'" fill="darkgreen" />'
   else: print '<circle cx="'+str(xpos)+'" cy="'+str(ypos)+'" r="'+str(solradius)+'" fill="red" />'
   # text: index
-  print '<text x="'+str(xpos+solradius)+'" y="'+str(ypos-anglefontsize)+'" fill="black" font-size="'+str(anglefontsize)+'">idx: '+str(index)+'</text>'
+  print '<text x="'+str(xpos+solradius)+'" y="'+str(ypos-anglefontsize)+'" fill="black" font-size="'+str(anglefontsize)+'">idx: S'+str(index)+'</text>'
   # text: radius
   print '<text x="'+str(xpos+solradius)+'" y="'+str(ypos)+'" fill="black" font-size="'+str(anglefontsize)+'">'+str(r)+'m</text>'
   # text: angle
