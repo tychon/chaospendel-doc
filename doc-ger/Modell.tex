@@ -59,7 +59,7 @@ erfasst werden können. Zu diesem Zweck verwenden wir einen am Ende des Pendels
 befestigten Magneten, der in am Rahmen montierten Spulen elektrische Ströme
 hervorruft, wenn er an diesen vorbeibewegt wird.
 
-Diese Ströme verursachen Spannungsschwankungen an den Spulen. (\TODO das steht auch schon weiter oben: )Um diese zu messen,
+Diese Ströme verursachen Spannungsschwankungen an den Spulen. Um diese zu messen,
 verbinden wir alle Spulen auf einer Seite mit einer 3,3 V"=Spannungsquelle und auf der
 anderen mit den 16 Analogeingängen eines ATmega2560"=Mikrocontrollers. Der auf einen
 Messbereich von 0 bis 5V eingestellte Mikrocontroller iteriert dann in einer Endlosschleife
@@ -151,7 +151,7 @@ Die grünen Balken zeigen den aktuellen Wert relativ zum Durchschnittswert an un
 Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{ArduinoReader} zu normalisieren und berechnet die magnetische Flussdichte zu jeder Spule.
 
 Um einen Messwert $x$ zu normalisieren, wird als erstes der Durchschnittswert $\mu$ abgezogen und dann durch die Anzahl der Windungen $n$ geteilt.
-Das Ergebnis daraus wird mit dem Verhältnis des Eigenwiderstands der Spule $R_S$ zu dem Widerstandswert $R_P$ des parallel geschalteten Widerstands multipliziert: (\TODO ist herr hannibal damit einverstanden?)
+Das Ergebnis daraus wird mit dem Verhältnis des Eigenwiderstands der Spule $R_S$ zu dem Widerstandswert $R_P$ des parallel geschalteten Widerstands multipliziert:
 
 \mathematik
 norm = \frac{x - \mu}{n} \cdot \frac{R_S}{R_P}
