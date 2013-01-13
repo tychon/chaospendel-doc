@@ -17,8 +17,10 @@ Auf der Rückseite des Aufbaus ist eine Holzplatte angebracht, auf der 17 Messsp
 Dort sind Spulen mit einer Windungszahl von 1600 Windungen rot und Spulen mit 20.000 Windungen grün markiert.
 
 Im Schaltplan in Abbildung \ref{fig:circuit} ist zu sehen, wie die Messspulen $S_0$ bis $S_{15}$ an die analogen Eingänge des Arduino angeschlossen werden.
-Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $R_0 = 3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben.
+Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $R_0 = 3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben. Ohne diese Widerstände würden sie machmal Spannungen
+außerhalb des Messbereichs erzeugen, was die Messelektronik durcheinander brächte.
 
+(\TODO Zwei Arbeitsspulen? S16 und noch eine, oder?)
 Die zwei Arbeitsspulen $S16$ sind direkt gegenüber der untersten beiden Messspulen angebracht und haben jeweils 300 Windungen.
 Sie sind für vier Ampere Strom ausgelegt, der über \TODO ?Relais ? MOSFET? geschaltet wird.
 Weil unsere Spannungsquelle für einen Ampere bei $24 V$ ausgelegt ist, haben wir einen Vorwiderstand von $R16 = 22 k\Omega$ in Reihe zu den Spulen geschaltet und so den Strom begrenzt.
@@ -90,20 +92,20 @@ Empfängerprogramms auf dem PC beispielsweise nach einem Neustart zu ermögliche
   \label{fig:network}
 \end{figure}
 
-Wir haben ein System aus Tools programmiert, die Informationen untereinander austauschen können und jedes Programm erfüllt einen bestimmten Zweck.
+Wir haben ein System aus Tools programmiert, die Informationen untereinander austauschen können, und jedes Programm erfüllt einen bestimmten Zweck.
 Im Flussdiagramm in Abbildung \ref{fig:network} ist zu erkennen, welche Daten ausgetauscht werden.
 Die durchgezogenen Pfeile sind Unix Domain Sockets, die gestrichelten Linien sind Dateien, die beim Programmstart geladen werden.
 
 \subsubsection{ArduinoReader}
-Der \app{ArduinoReader} verbindet sich über eine serielle Schnittstelle mit dem Arduino und ließt die Daten aus, die der Arduino gemessen hat.
-Die Datensätze werden mit einem Zeitstempel versehen und über ein Unix Domain Socket an andere Programme weiter gesendet und in der Datei \app{ReplayFile} gespeichert.
+Der \app{ArduinoReader} verbindet sich über eine serielle Schnittstelle mit dem Arduino und liest die Daten aus, die der Arduino gemessen hat.
+Die Datensätze werden mit einem Zeitstempel versehen und über einen Unix Domain Socket sowohl an andere Programme weiter gesendet als auch in der Datei \app{ReplayFile} gespeichert.
 Ein Datensatz besteht aus 16 Zahlen im Bereich von 0 bis 1023, die die Messwerte für jede Spule angeben.
 Der Bereich diser Zahl wird von der 10"=Bit"=Genauigkeit des Analog"=Digital"=Wandlers vorgegeben.
 Außerdem können Kommandos zum Schalten der digitalen Ausgänge an den \app{ArduinoReader} gesendet werden, die dann an den Arduino weitergeleitet werden.
 
 \subsubsection{Replayer}
 Anstatt des \app{ArduinoReader}s kann der \app{Replayer} eingesetzt werden, der vom \app{ArduinoReader} aufgezeichnete Daten abspielt.
-So können mehrere Analysen von gleichen Daten gemacht werden, oder gearbeitet werden, ohne dass ein Arduino angeschlossen ist.
+So können mehrere Analysen von gleichen Daten gemacht werden, oder es kann gearbeitet werden, ohne dass ein Arduino angeschlossen ist.
 
 \subsubsection{Normalisation}
 Die \app{Normalisation} liest die Daten des \app{ArduinoReader}s und berechnet für jede Spule separat Durchschnittswerte und Standardabweichung.
@@ -131,16 +133,16 @@ Die grünen Balken zeigen den aktuellen Wert relativ zum Durchschnittswert an un
 Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{ArduinoReader} zu normalisieren und berechnet die magnetische Flussdichte zu jeder Spule.
 
 Um einen Messwert $x$ zu normalisieren, wird als erstes der Durchschnittswert $\mu$ abgezogen und dann durch die Anzahl der Windungen $n$ geteilt.
-Das Ergebnis daraus wird mit dem Verhältnis von Eigenwiderstand der Spule $R_S$ mit dem Widerstandswert $R_P$ des parallel geschalteten Widerstands multipliziert: (\TODO ist herr hannibal damit einverstanden?)
+Das Ergebnis daraus wird mit dem Verhältnis des Eigenwiderstands der Spule $R_S$ zu dem Widerstandswert $R_P$ des parallel geschalteten Widerstands multipliziert: (\TODO ist herr hannibal damit einverstanden?)
 
 \mathematik
 norm = \frac{x - \mu}{n} \cdot \frac{R_S}{R_P}
 \mathematikstop
 
 Der normalisierte Wert $norm$ ist jetzt für alle Spulen vergleichbar.
-Aus ihm wird jetzt ein Integral berechnet, dass als magnetische Flussdichte interpretiert werden kann.
-Da die Messdaten ein Rauschen enthalten und der Analog"=Digital"=Wandler nicht perfekt linear arbeitet, konvergiert die Summmer aller normalisierten Daten einer Spule schnell in den stark positiven oder stark negativen  Bereich.
-Um diese Konvergenz zu beherrschen werden die Integrale auf 0 zurückgesetzt, wenn in 50  aufeinanderfolgenden Datensätzen kein Messwert außerhalb des Rauschens lag.
+Aus ihm wird dann ein Integral berechnet, das als magnetische Flussdichte interpretiert werden kann.
+Da die Messdaten ein Rauschen enthalten und der Analog"=Digital"=Wandler nicht perfekt linear arbeitet, konvergiert die Summme aller normalisierten Daten einer Spule schnell in den stark positiven oder stark negativen Bereich.
+Um diese Konvergenz zu beherrschen, werden die Integrale auf 0 zurückgesetzt, wenn in 50  aufeinanderfolgenden Datensätzen kein Messwert außerhalb des Rauschens lag.
 Sie werden auch zurückgesetzt, wenn ihr Wert kleiner 0 wird.
 
 \begin{figure}[hbt]
@@ -152,27 +154,27 @@ Sie werden auch zurückgesetzt, wenn ihr Wert kleiner 0 wird.
 
 In Abbildung \ref{fig:screentracker} ist ein Screenshot von der Anzeige des \app{Tracker}s zu sehen.
 Sie zeigt die Integrale als unterschiedlich große grüne Kreise um die Position der Spulen.
-Es ist zu erkennen, dass nur eine Spule ein Integral größer 0 hat, und in dessen Nähe befindet sich der Magnet.
+Es ist zu erkennen, dass nur eine Spule ein Integral größer 0 hat, und in deren Nähe befindet sich der Magnet.
 
 Neben der Normalisierung sortiert der \app{Tracker} alle Datensätze aus, die verfälscht sein könnten.
-Falsch ist zum Beispiel ein Datensatz, der einen Messwert enthält der gleich 0 oder 1023 ist. In dem Fall kann es sein, dass die Spannung an einer Spule so groß ist, dass der Analog"=Digital"=Wandler für die nächsten Messungen falsche Werte liefert und der gesamte Datensatz falsch ist.
+Falsch ist zum Beispiel ein Datensatz, der einen Messwert enthält, der gleich 0 oder 1023 ist. In dem Fall kann es sein, dass die Spannung an einer Spule so groß ist, dass der Analog"=Digital"=Wandler für die nächsten Messungen falsche Werte liefert und der gesamte Datensatz falsch ist.
 
 Es werden auch Datensätze verworfen, bei denen mehrere Spulen Messwerte außerhalb des Rauschens anzeigen.
 Dann ist nämlich wahrscheinlich eine Arbeitsspule umgeschaltet worden, die alle Messpulen beeinflusst.
 
-Zusätzlich versendet der \app{Tracker} den Index der Messspule mit dem größten Integral über ein Unix Domain Socket.
+Zusätzlich versendet der \app{Tracker} den Index der Messspule mit dem größten Integral über einen Unix Domain Socket.
 
 \TODO manipulation?
 
 \subsubsection{Vorhersage}
 Die Vorhersage wird von dem Programm \app{MarkovPrediction} gemacht.
-Dazu werden die letzten drei Spulen an denen der Magnet vorbeigekommen ist gespeichert.
+Dazu werden die letzten drei Spulen, an denen der Magnet vorbeigekommen ist, gespeichert.
 Wo der Magnet ist, wird vom \app{Tracker} abgefragt.
 Für jede neue Spule, an der das Pendel vorbeikommt, wird der Zustand des Systems ermittelt und in der Übergangsmatrix wird die Wahrscheinlichkeit für einen Übergang vom letzten Zustand in den aktuellen Zustand erhöht.
 
 Der Zustand des Systems ist vereinfacht und lässt sich damit einzig durch den Pfad des Pendels beschreiben.
 Er besteht aus den letzten drei besuchten Spulen und der Geschwindigkeit des Pendels.
-Die Geschwindigkeit kann mithilfe der Zeitstempel und der Position der Spulen ungefäht bestimmt werden.
+Die Geschwindigkeit kann mithilfe der Zeitstempel und der Position der Spulen ungefähr bestimmt werden.
 Diese Information wird in eine Zahl codiert, wobei die Geschwindigkeit zuvor in einen von fünf Bereichen eingeordnet wurde.
 
 \begin{figure}[hbt]
@@ -183,7 +185,7 @@ Diese Information wird in eine Zahl codiert, wobei die Geschwindigkeit zuvor in 
 \end{figure}
 
 In Abbildung \ref{fig:screenmarkov} ist ein Zustand zu sehen.
-Die drei letzten Spulen sind grün markiert und haben die Indizes 14, 15, 7 (der älteste zuerst, die Indices der Spulen können auch in Abbildung \ref{fig:pendulumsketch} auf Seite \pageref{fig:pendulumsketch} nachgesehen werden).
+Die drei letzten Spulen sind grün markiert und haben die Indizes 14, 15, 7 (der älteste zuerst, die Indizes der Spulen können auch in Abbildung \ref{fig:pendulumsketch} auf Seite \pageref{fig:pendulumsketch} nachgesehen werden).
 Die Geschwindigkeit des Pendels beträgt $0,8 m/s$ und wird bei fünf Geschwindigkeitsbereichen und einer Maximalgeschwindigkeit von $1.5 m/s$ in den Bereich mit dem Index zwei eingeordnet:
 \mathematik
 \textbf{2}\cdot\frac{1.5 m/s}{5} < 0.8 m/s < 3\cdot\frac{1.5 m/s}{5}
@@ -200,7 +202,8 @@ Der wahrscheinlichste nächste Zustand hat den Code 8049, also wird wahrscheinli
 Dies ist auch in der Abbildung als blauer Pfad zu erkennen.
 
 Da es so $16^3 \cdot 5 = 20480$ verschiedene codierte Zustände gibt, ist die Übergangsmatrix relativ groß.
-Sie kann in einer Datei gespeichert werden, damit mehr Übergänge eingetragen werden können, nachdem das Programm neu gestartet wurde.
+Sie kann in einer Datei gespeichert werden, damit mehr Übergänge eingetragen werden können, nachdem das Programm neu gestartet wurde, und damit sie auch nach einem Neustart weiterhin zur Vorhersage
+genutzt werden kann.
 
 \TODO manipulation?
 
