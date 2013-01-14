@@ -26,7 +26,7 @@ Die Berechnung kann zum Beispiel iterativ mit dem Runge"=Kutta"=Verfahren erfolg
 
 \begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/mathsketch_dia.png}
-  \caption{Zeichnung der Pendelarme zur Bedeutung der Längenangaben}
+  \caption{Zeichnung der Pendelarme zur Bedeutung der Längenangaben \TODO winkel}
   \label{fig:mathsketch}
 \end{figure}
 
@@ -36,17 +36,8 @@ $l_{1a}$ ist eine negative Zahl und gibt an, wie lang das erste Pendel auf der S
 $l_1$ gibt den Abstand der beiden Achsen an und $l_{1b}$ beschreibt als positive Zahl die Länge des ersten Pendels in Richtung des zweiten Pendels.
 $l_{2a}$ und $l_{2b}$ geben die beiden Längen des zweiten Pendelarms relativ zu seiner Achse an.
 
-Diese Längenangaben sind in den Konstanten $k_1$ bis $k_5$ wiederzufinden, die darauf abzielen, die Eigenschaften des Pendels so genau wie möglich beschreiben zu können, indem zwei Dichtefunktionen $\rho(r)$ über den Abstand $r$ von der jeweiligen Achse für die beiden Pendelarme angegeben werden.
+Diese Längenangaben sind in den Konstanten $k_1$ bis $k_5$ wiederzufinden, die darauf abzielen, die Eigenschaften des Pendels so genau wie möglich beschreiben zu können, indem zwei Dichtefunktionen $\rho(r)$ über den Abstand $r$ von der jeweiligen Achse für die beiden Pendelarme angegeben werden:
 
-Die Differentialgleichungen lauten wie folgt:
-\mathematik
-\phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
-\phid_2 &= \frac{k_1 p_2 + l1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
-\dot{p}_1 &= -l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_2 sin \phi_1 - g l_1 k_3 sin \phi_1 \\[0.5\baselineskip]
-\dot{p}_2 &= l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_5 sin \phi_2 \\[0.5\baselineskip]
-\mathematikstop
-
-So sind die Konstaten $k_1$ bis $k_5$ definiert:
 \mathematik
 k_1 &= \int^{l_{1b}}_{l_{1a}} \rho_1(r) \; r^2 \intend r
 \qquad && k_2 &= \int^{l_{1b}}_{l_{1a}} \rho_1(r) \; r \intend r \\
@@ -55,7 +46,8 @@ k_3 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \intend r
 k_5 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \; r \intend r \\
 \mathematikstop
 
-Hier sind die Formeln für die Berechnung der Energien, die später in der Simulation angezeigt werden, und aus denen auch die Differentialgleichungen hergeleitet wurden. $T$ und $V$ sind die kinetische und die potentielle Energie:
+Hier sind die Formeln für die Berechnung der Energien, die später auch in der Simulation gezeigt werden, und die durch die Konstanten $k_1$ bis $k_5$ verallgemeinert sind. $T$ und $V$ sind die kinetische und die potentielle Energie:
+
 \mathematik
 T_1 &= \half k_1 \phid_1^2 & V_1 &= -g k_2 cos \phi_1 \\
 T_2 &= \half l_1 k_3 \phid_1^2 + \half k_4 \phid_2^2 + l_1 \phid_1 \phid_2 k_5 cos(\phi_1 - \phi_2) & V_2 &= -g l_1 k_3 cos \phi_1 - g k_5 cos \phi_2 \\
@@ -66,7 +58,31 @@ T_{Ges} &= T_1 + T_2\\
 E_{Ges} &= T_{Ges} + V_{Ges}\\
 \mathematikstop
 
-\subsection{Software}
+Die Lagrange-Funktion $L$ ist dann:
+
+\mathematik
+L &= && T_{Ges} - V_{Ges} \\
+  &= && \half  \phid_1^2 k_1 + \half l_1 \phid_1^2 k_3 + \half \phid_2^2 k_4 + l_1 \phid_1 \phid_2 k_5 cos(\phi_1 - \phi_2) \\
+  &&& + g k_2  cos \phi_1 + g l_1 k_3 cos \phi_1 + g k_5 cos \phi_2
+\mathematikstop
+
+Daraus ergeben sich diese Euler-Lagrange-Gleichungen:
+
+\mathematik
+\dot{p}_1 - \frac{\partial L}{\partial \phi_1} &= 0 \qquad &\text{mit}\quad && p_1 = \frac{\partial L}{\partial \phid_1} \\
+\dot{p}_2 - \frac{\partial L}{\partial \phi_2} &= 0        &\text{mit}\quad && p_2 = \frac{\partial L}{\partial \phid_2}\\
+\mathematikstop
+
+Nach verschiedenen Umformungsschritten, lauten die Differentialgleichungen wie folgt:
+\mathematik
+\phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
+\phid_2 &= \frac{k_1 p_2 + l_1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
+\dot{p}_1 &= -l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_2 sin \phi_1 - g l_1 k_3 sin \phi_1 \\[0.5\baselineskip]
+\dot{p}_2 &= l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_5 sin \phi_2 \\[0.5\baselineskip]
+\mathematikstop
+
+\subsection{Simulation mit Haskell \TODO C}
+
 Wir haben in Haskell eine Simulation geschrieben, die das klassische Runge"=Kutta"=Verfahren anwendet, da Haskell sich gut für Mathematik und den Umgang mit Formeln eignet. Die funktionierende Haskell-Implementierung haben wir dann aus Geschwindigkeitsgründen nach C portiert.
 \citep{wikirungekutta}
 
