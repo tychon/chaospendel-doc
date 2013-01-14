@@ -3,13 +3,13 @@
 \subsection{Was ist ein chaotisches System?}
 Systeme sind chaotisch, wenn sie in labile Zustände in ihren Freiheitsgraden gelagen können.
 Ein Doppelpendel hat vier Freiheitsgrade: zwei Winkel und zwei Impulse.
-Ein typischer labiler Zustand ist es zum Beispiel, wenn das Pendel mit einem sehr geringen Impuls fast senkrecht nach oben zeigt.
+Ein typischer labiler Zustand liegt zum Beispiel vor, wenn das Pendel mit einem sehr geringen Impuls fast senkrecht nach oben zeigt.
 Hier hängt der weitere Verlauf stark von kleinen Unterschieden in Position und Impuls ab.
 
 Auf dieses Phänomen wird oft mit dem Ausdruck "`Schmetterlingseffekt"' Bezug genommen.
-Interessant ist, dass die Systeme eigentlich deterministisch sind, und durch die Startbedingungen der weitere Verlauf vollständig berechnet werdn könnte.
-Allerdings führen Messfehler und Ungenauigkeiten in der Berechnung zu Fehlern an genau den labilen Zuständen.
-So weicht eine Simulation meist schnell von der Realität ab.
+Interessant ist, dass die Systeme eigentlich deterministisch sind und mithilfe der Startbedingungen der weitere Verlauf vollständig berechnet werden könnte.
+Messfehler und Ungenauigkeiten in der Berechnung führen allerdings zu Fehlern, die sich in labilen Zuständen sehr stark auswirken.
+Aus diesem Grund weicht eine Simulation meist schnell von der Realität ab.
 
 \subsection{Euler-Lagrange-Gleichung}
 Der Lösungsansatz über die Euler"=Lagrange"=Gleichung ist von der englischen Wikipedia übernommen worden.
@@ -72,7 +72,7 @@ Daraus ergeben sich diese Euler-Lagrange-Gleichungen:
 \dot{p}_2 - \frac{\partial L}{\partial \phi_2} &= 0        &\text{mit}\quad && p_2 = \frac{\partial L}{\partial \phid_2}\\
 \mathematikstop
 
-Nach verschiedenen Umformungsschritten, lauten die Differentialgleichungen wie folgt:
+Nach verschiedenen Umformungsschritten lauten die Differentialgleichungen wie folgt:
 \mathematik
 \phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
 \phid_2 &= \frac{k_1 p_2 + l_1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
@@ -80,7 +80,7 @@ Nach verschiedenen Umformungsschritten, lauten die Differentialgleichungen wie f
 \dot{p}_2 &= l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_5 sin \phi_2 \\[0.5\baselineskip]
 \mathematikstop
 
-\subsection{Simulation mit Haskell \TODO C}
+\subsection{Numerische Simulation mit Haskell/C}
 
 Wir haben in Haskell eine Simulation geschrieben, die das klassische Runge"=Kutta"=Verfahren anwendet, da Haskell sich gut für Mathematik und den Umgang mit Formeln eignet. Die funktionierende Haskell-Implementierung haben wir dann aus Geschwindigkeitsgründen nach C portiert.
 
