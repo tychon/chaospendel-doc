@@ -113,11 +113,6 @@ Wir haben ein System aus Tools programmiert, die Informationen untereinander aus
 Im Flussdiagramm in Abbildung \ref{fig:network} ist zu erkennen, welche Daten ausgetauscht werden.
 Die durchgezogenen Pfeile sind Unix Domain Sockets, die gestrichelten Linien sind Dateien, die beim Programmstart geladen werden.
 
-\begin{wrapfigure}{r}{0.4\textwidth}
-  \includegraphics[width=0.4\textwidth]{images/rangetester.png}
-  \caption{Screenshot vom \app{Rangetester}}
-  \label{fig:screenrangetester}
-\end{wrapfigure}
 
 \subsubsection{ArduinoReader}
 Der \app{ArduinoReader} verbindet sich über eine serielle Schnittstelle mit dem Arduino und liest die Daten aus, die der Arduino gemessen hat.
@@ -129,6 +124,12 @@ Außerdem können Kommandos zum Schalten der digitalen Ausgänge an den \app{Ard
 \subsubsection{Replayer}
 Anstatt des \app{Arduino"-Reader}s kann der \app{Re"-play"-er} eingesetzt werden, der vom \app{Arduino"-Reader} aufgezeichnete Daten abspielt.
 So können mehrere Analysen von gleichen Daten gemacht werden, oder es kann gearbeitet werden, ohne dass ein Arduino angeschlossen ist.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \includegraphics[width=0.4\textwidth]{images/rangetester.png}
+  \caption{Screenshot vom \app{Rangetester}}
+  \label{fig:screenrangetester}
+\end{wrapfigure}
 
 \subsubsection{Normalisation}
 Die \app{Normalisation} liest die Daten des \app{ArduinoReader}s und berechnet für jede Spule separat Durchschnittswerte und Standardabweichung.
