@@ -13,7 +13,6 @@ So weicht eine Simulation meist schnell von der Realität ab.
 
 \subsection{Euler-Lagrange-Gleichung}
 Der Lösungsansatz über die Euler"=Lagrange"=Gleichung ist von der englischen Wikipedia übernommen worden.
-\citep{wikidoublependulum}
 
 Die Gleichungen wurden nur um die Konstanten $k_1$ bis $k_5$ erweitert, um sie an unser Pendel anpassen zu können, das keine gleichmäßige Massenverteilung aufweist.
 
@@ -84,7 +83,6 @@ Nach verschiedenen Umformungsschritten, lauten die Differentialgleichungen wie f
 \subsection{Simulation mit Haskell \TODO C}
 
 Wir haben in Haskell eine Simulation geschrieben, die das klassische Runge"=Kutta"=Verfahren anwendet, da Haskell sich gut für Mathematik und den Umgang mit Formeln eignet. Die funktionierende Haskell-Implementierung haben wir dann aus Geschwindigkeitsgründen nach C portiert.
-\citep{wikirungekutta}
 
 Die Simulation generiert eine CSV-Datei, in die in regelmäßigen Zeitintervallen die Winkel und die verschiedenen Energien geschrieben werden.
 Auf die Winkel wird danach die diskrete Fourier"=Transformation mit einem sich bewegenden Fenster angewendet, um Perioden in der Bewegung erkennen zu können.
