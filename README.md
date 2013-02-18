@@ -1,31 +1,14 @@
 
-see
+This is the documentation for the chaos pendulum project on
 
-http://piratepad.net/lExBotVYBM
+git@github.com:tychon/chaospendel.git
 
-Network
-=======
+It is a separate project, to separate the code history from some big images.
 
-See the big README in the network folder and some graphics in the german
-documentation.
+You need some different programs to get the makefile in doc-ger/ running:
 
-Dependencies
-============
-
-* ghc
+* some latex compiler with some extra packages
 * python
-* make
-
-## Fourier analysis
-* haskell package: fft (install it with cabal)
-* fftw development files (e.g. debian package: libfftw3-dev)
-
-## Plotting
-* octave (plus some things for octave to print plots)
-* gnuplot
-
-## Doc
-* Tex (texlive for example; plus some packages for maths)
-* rubber (for compiling tex on the easy way)
-* POVRay
+* ImageMagick: convert
+* dia
 
