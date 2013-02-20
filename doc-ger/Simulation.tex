@@ -45,7 +45,7 @@ k_3 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \intend r
 k_5 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \; r \intend r \\
 \mathematikstop
 
-Hier sind die Formeln für die Berechnung der Energien, die später auch in der Simulation gezeigt werden, und die durch die Konstanten $k_1$ bis $k_5$ verallgemeinert sind. $T$ und $V$ sind die kinetische und die potentielle Energie:
+Hier sind die Formeln für die Berechnung der Energien zu sehen, die später auch in der Simulation gezeigt werden, und die durch die Konstanten $k_1$ bis $k_5$ verallgemeinert sind. $T$ und $V$ sind die kinetische und die potentielle Energie:
 
 \mathematik
 T_1 &= \half k_1 \phid_1^2 & V_1 &= -g k_2 cos \phi_1 \\
@@ -109,4 +109,10 @@ Der Abstand nach rechts vom ersten Balken aus ist proportional zur Frequenz.
 Aus dem aktuell zu sehenden Fester ist zum Beispiel für den ersten Pendelarm abzulesen, dass sich das Pendel regelmäßg von rechts nach links bewegt, zu erkennen am rechten Ausschlag, und der zweite Pendelarm eine schwächere aber schnellere Schwingung erzeugt, zu sehen als linker Ausschlag.
 
 Die Transformation des zweiten Pendelarms zeigt eine starke Korrelation mit der Transformation des ersten Pendelarms. Das liegt daran, dass für diese Abbildung eine relativ stark periodische Einstellung des Systems gewählt wurde und der zweite Pendelarm eine dem ersten Pendelarm ähnliche Bewegung durchführt.
+
+\subsection{Untersuchung auf Frequenzverdopplung}
+
+Wenn die Simulation sehr oft durchgeführt wird, und bei jeder Ausführung der Startwinkel $\phi_1$ um einen kleinen Schritt vergrößert wird, kann das Verhalten des Systems bei verschiedenen Energien untersucht werden.
+Der Winkel des zweiten Pendelarms wird dabei immer mit der doppelten Größe initialisert: $\phi_2 = 2\phi_1$.
+In Abbildung \TODO ist ein Diagramm zu sehen, auf dem auf der vertikalen Achse die Positionen der Maxima aus der Fourieranalyse für die ersten sechs Sekunden der Simulation aufgetragen sind. Von links nach rechts wird $\phi_1$ linear von $0\;rad$ bis $\pi/4\;rad$ vergrößert.
 
