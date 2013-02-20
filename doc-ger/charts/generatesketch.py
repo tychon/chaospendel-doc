@@ -10,7 +10,7 @@ def strip(line):
     line = string.replace(line, c, '')
   return line
 
-f = open('../../network/data_pendulum', 'r');
+f = open('../../chaospendel/network/data_pendulum', 'r');
 
 maxpendlength = 0
 radius = []
