@@ -1,27 +1,26 @@
 
 \section{Die Bewegung des Doppelpendels}
 \subsection{Was ist ein chaotisches System?}
-Systeme sind chaotisch, wenn sie in labile Zustände in ihren Freiheitsgraden gelagen können.
+Systeme sind chaotisch, wenn sie in ihren Freiheitsgraden in labile Zustände gelangen können.
 Ein Doppelpendel hat vier Freiheitsgrade: zwei Winkel und zwei Impulse.
 Ein typischer labiler Zustand liegt zum Beispiel vor, wenn das Pendel mit einem sehr geringen Impuls fast senkrecht nach oben zeigt.
 Hier hängt der weitere Verlauf stark von kleinen Unterschieden in Position und Impuls ab.
 
 Auf dieses Phänomen wird oft mit dem Ausdruck "`Schmetterlingseffekt"' Bezug genommen.
-Interessant ist, dass die Systeme eigentlich deterministisch sind und mithilfe der Startbedingungen der weitere Verlauf vollständig berechnet werden könnte.
-Messfehler und Ungenauigkeiten in der Berechnung führen allerdings zu Fehlern, die sich in labilen Zuständen sehr stark auswirken.
-Aus diesem Grund weicht eine Simulation meist schnell von der Realität ab.
+Interessant ist, dass die Systeme eigentlich deterministisch sind und mithilfe der Startbedingungen aus den Newton'schen Gleichungen der weitere Verlauf vollständig berechnet werden könnte.
+Messfehler und Ungenauigkeiten in der Berechnung führen allerdings zu Fehlern, die sich in labilen Zuständen so stark auswirken, dass eine Simulation in sehr kurzer Zeit erheblich von der Realität abweicht.
 
 \subsection{Euler-Lagrange-Gleichung}
 Der Lösungsansatz über die Euler"=Lagrange"=Gleichung ist von der englischen Wikipedia übernommen worden.
 
-Die Gleichungen wurden nur um die Konstanten $k_1$ bis $k_5$ erweitert, um sie an unser Pendel anpassen zu können, das keine gleichmäßige Massenverteilung aufweist.
+Die Gleichungen wurden allerdings um die Konstanten $k_1$ bis $k_5$ erweitert, um sie an unser Pendel anpassen zu können, das keine gleichmäßige Massenverteilung aufweist.
 
-Die Positionen der Pendelarme können durch die zwei generalisierten Koordinaten $\phi_1$ und $\phi_2$ beschrieben werden, die die Winkel der Arme angeben.
-Alle Winkel werden relativ zur Ruhelage angegeben, also bedeutet $0^\circ$, dass das Pendel senkrecht nach unten zeigt, während es bei $45^\circ$ nach unten rechts zeigt.
+Die Positionen der Pendelarme können durch die zwei generalisierten Koordinaten $\phi_1$ und $\phi_2$ beschrieben werden, welche die Winkel der Arme angeben.
+Alle Winkel werden relativ zur Ruhelage angegeben, also bedeutet $0^\circ$, dass ein Pendelarm senkrecht nach unten zeigt, während er bei $45^\circ$ nach unten rechts zeigt.
 Für die vollständige Angabe des Zustands des Systems ist zusätzlich noch der generalisierte Impuls, hier als $p_1$ und $p_2$ bezeichnet, vonnöten.
 
-Aus den Funktionen $\dot{p}_1$, $\dot{p}_2$, $\phid_1$ und $\phid_2$ setzt sich das System von Differentialgleichungen zusammen, mit dem sich aus dem aktuellen Zustand der Zustand des Systems zu jeder gegebenen Zeit berechnen lässt.
-Die Berechnung kann zum Beispiel iterativ mit dem Runge"=Kutta"=Verfahren erfolgen.
+Aus dem System von Differentialgleichungen für $p_1$, $p_2$, $\phi_1$ und $\phi_2$ lässt sich aus dem aktuellen Zustand der Zustand des Systems zu jeder gegebenen Zeit berechnen.
+Die Berechnung kann zum Beispiel iterativ mit dem Runge"=Kutta"=Verfahren vierter Ordnung erfolgen.
 
 \begin{figure}[bht]
   \includegraphics[width=\textwidth]{charts/mathsketch_dia.png}
@@ -29,13 +28,13 @@ Die Berechnung kann zum Beispiel iterativ mit dem Runge"=Kutta"=Verfahren erfolg
   \label{fig:mathsketch}
 \end{figure}
 
-In Abbildung \ref{fig:mathsketch} ist zu erkennen, wie die Längenangaben zu interpretieren sind.
+In Abbildung \ref{fig:mathsketch} ist dargestellt, wie die Längenangaben zu interpretieren sind.
 An der ersten Achse ist das Doppelpendel aufgehängt.
 $l_{1a}$ ist eine negative Zahl und gibt an, wie lang das erste Pendel auf der Seite ist, an der nicht das zweite Pendel hängt.
 $l_1$ gibt den Abstand der beiden Achsen an und $l_{1b}$ beschreibt als positive Zahl die Länge des ersten Pendels in Richtung des zweiten Pendels.
 $l_{2a}$ und $l_{2b}$ geben die beiden Längen des zweiten Pendelarms relativ zu seiner Achse an.
 
-Diese Längenangaben sind in den Konstanten $k_1$ bis $k_5$ wiederzufinden, die darauf abzielen, die Eigenschaften des Pendels so genau wie möglich beschreiben zu können, indem zwei Dichtefunktionen $\rho(r)$ über den Abstand $r$ von der jeweiligen Achse für die beiden Pendelarme angegeben werden:
+Diese Längenangaben sind in den Konstanten $k_1$ bis $k_5$ wiederzufinden, die darauf abzielen, die Eigenschaften des Pendels so genau wie möglich beschreiben zu können, indem zwei Dichtefunktionen $\rho_1(r)$ und $\rho_2(r)$ für die Massenverteilung über den Abstand $r$ von der jeweiligen Achse für die beiden Pendelarme angegeben werden:
 
 \mathematik
 k_1 &= \int^{l_{1b}}_{l_{1a}} \rho_1(r) \; r^2 \intend r
@@ -45,7 +44,7 @@ k_3 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \intend r
 k_5 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \; r \intend r \\
 \mathematikstop
 
-Hier sind die Formeln für die Berechnung der Energien zu sehen, die später auch in der Simulation gezeigt werden, und die durch die Konstanten $k_1$ bis $k_5$ verallgemeinert sind. $T$ und $V$ sind die kinetische und die potentielle Energie:
+Die folgenden Formeln beschreiben die Energien, die später auch in der Simulation gezeigt werden, und die durch die Konstanten $k_1$ bis $k_5$ bestimmt sind. Diese Konstanten enstehen aus einer Integration über die Massenverteilung; beispielsweise wird $T_1 = \int^{l_{1b}}_{l_{1a}} \half \rho_1(r) (r \cdot \phid_1)^2 \intend r$, wo $\half \rho_1(r) (r \phid_1)^2$ die kinetische Energie eines Massenelements angibt, zu:
 
 \mathematik
 T_1 &= \half k_1 \phid_1^2 & V_1 &= -g k_2 cos \phi_1 \\
@@ -65,14 +64,15 @@ L &= && T_{Ges} - V_{Ges} \\
   &&& + g k_2  cos \phi_1 + g l_1 k_3 cos \phi_1 + g k_5 cos \phi_2
 \mathematikstop
 
-Daraus ergeben sich diese Euler-Lagrange-Gleichungen:
+Daraus ergeben sich folgende Euler-Lagrange-Gleichungen:
 
 \mathematik
 \dot{p}_1 - \frac{\partial L}{\partial \phi_1} &= 0 \qquad &\text{mit}\quad && p_1 = \frac{\partial L}{\partial \phid_1} \\
 \dot{p}_2 - \frac{\partial L}{\partial \phi_2} &= 0        &\text{mit}\quad && p_2 = \frac{\partial L}{\partial \phid_2}\\
 \mathematikstop
 
-Nach verschiedenen Umformungsschritten lauten die Differentialgleichungen wie folgt:
+Nach Auflösung zu den Ableitungen lauten die Differentialgleichungen wie folgt:
+
 \mathematik
 \phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
 \phid_2 &= \frac{k_1 p_2 + l_1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
@@ -80,9 +80,11 @@ Nach verschiedenen Umformungsschritten lauten die Differentialgleichungen wie fo
 \dot{p}_2 &= l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_5 sin \phi_2 \\[0.5\baselineskip]
 \mathematikstop
 
+Nun wird auf der rechten Seite der Gleichungen für $\dot{p}_1$ und $\dot{p}_2$ noch $\phid_1$ und $\phid_2$ durch die rechte Seite der ersten zwei Gleichungen ersetzt, um eine \TODO Form für die Berechnung mithilfe des Runge"=Kutta"=Verfahrens zu erreichen.
+
 \subsection{Numerische Simulation mit Haskell/C}
 
-Wir haben in Haskell eine Simulation geschrieben, die das klassische Runge"=Kutta"=Verfahren anwendet, da Haskell sich gut für Mathematik und den Umgang mit Formeln eignet. Die funktionierende Haskell-Implementierung haben wir dann aus Geschwindigkeitsgründen nach C portiert.
+Wir haben in Haskell eine Simulation geschrieben, die das klassische Runge"=Kutta"=Verfahren anwendet, da sich diese Sprache gut für Mathematik und den Umgang mit Formeln eignet. Die funktionierende Haskell-Implementierung haben wir dann aus Geschwindigkeitsgründen nach C portiert.
 
 Die Simulation generiert eine CSV-Datei, in die in regelmäßigen Zeitintervallen die Winkel und die verschiedenen Energien geschrieben werden.
 Auf die Winkel wird danach die diskrete Fourier"=Transformation mit einem sich bewegenden Fenster angewendet, um Perioden in der Bewegung erkennen zu können.
@@ -95,10 +97,10 @@ In Abbildung \ref{fig:hssim} ist ein Screenshot der Anzeige zu sehen.
   \label{fig:hssim}
 \end{figure}
 
-Zu erkennen ist die aktuelle Position des Pendels als rote Skizze.
+Zu erkennen ist die aktuelle Position des Pendels als rote Skizze der Arme.
 Die dicken grünen Balken rechts daneben zeigen auf einer für alle dicken Balken gleichen Skalierung die Energien $T_1$, $T_2$, $T_{Ges}$, $V_1$, $V_2$, $V_{Ges}$ und $E_{Ges}$ in der Reihenfolge von links nach rechts an.
 Der blaue Stricht zeigt die Nulllinie an, die roten Striche die Anfangswerte der Energien.
-Die potentielle Energie ist anfangs kleiner null, weil der Koordinatenurspung in der ersten Achse liegt und damit die Schwerpunkte der Pendelarme unterhalb des Bezugspunkts liegen.
+Die potentielle Energie ist anfangs kleiner als null, weil der Koordinatenurspung in der ersten Achse liegt und damit die Schwerpunkte der Pendelarme unterhalb des Bezugspunkts liegen.
 Die Gesamtenergie $E_{Ges}$ sollte bei einer perfekten Simulation nicht von ihrem Anfangswert abweichen, aber wie zu sehen ist, wächst sie in unserer Simulation stetig.
 Dies ist auf die Ungenauigkeiten der numerischen Simulation zurückzuführen.
 

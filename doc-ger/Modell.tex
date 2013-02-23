@@ -1,5 +1,7 @@
 
-\section{Der Aufbau des Modells}
+\section{Der experimentelle Aufbau}
+
+\subsection{Das Doppelpendel}
 
 \begin{figure}[bht]
   \centering
@@ -30,6 +32,11 @@ Falls die Konstruktion dann verrutschen oder kippen sollte, ginge ein Teil der E
   \label{fig:pendulumsketch}
 \end{figure}
 
+\subsection{Messwerterfassung mit Induktionsspulen}
+
+Um das Verhalten des Doppelpendels zu beeinflussen, muss der Zustand des Pendels erfasst werden können.
+Zu diesem Zweck verwenden wir einen am Ende des Pendels befestigten Magneten, der in am Rahmen montierten Spulen durch Induktion elektrische Ströme hervorruft, wenn er an diesen vorbeibewegt wird.
+
 Auf der Rückseite des Aufbaus ist eine Holzplatte angebracht, auf der 17 Messspulen befestigt sind, deren Konfiguration in Abbildung \ref{fig:pendulumsketch} zu sehen ist.
 Dort sind Spulen mit einer Windungszahl von 1600 Windungen rot und Spulen mit 20.000 Windungen grün markiert.
 
@@ -40,25 +47,21 @@ Dort sind Spulen mit einer Windungszahl von 1600 Windungen rot und Spulen mit 20
 \end{figure}
 
 Im Schaltplan in Abbildung \ref{fig:circuit} ist zu sehen, wie die Messspulen $S_0$ bis $S_{15}$ an die analogen Eingänge des Arduino angeschlossen werden.
-Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $R_0 = 3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben. Ohne diese Widerstände würden sie machmal Spannungen
-außerhalb des Messbereichs erzeugen, was die Messelektronik durcheinander brächte.
+Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $R_0 = 3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben.
+Ohne diese Widerstände würden sie machmal Spannungen außerhalb des Messbereichs erzeugen, was die Messelektronik durcheinander brächte.
+
+\subsection{Arbeitsspulen zur Chaoskontrolle}
 
 Die zwei Arbeitsspulen $S_{16}$ und $S_{17}$ sind direkt gegenüber der untersten beiden Messspulen angebracht und haben jeweils 300 Windungen.
-Sie sind für vier Ampere Strom ausgelegt, der über NMOS-Transistoren geschaltet wird.
-Weil unsere Spannungsquelle für einen Ampere bei $24 V$ ausgelegt ist, haben wir einen Vorwiderstand von $R_{16} = 22 k\Omega$ in Reihe zu den Spulen geschaltet und so den Strom begrenzt.
-Zusätzlich ist zu jeder Arbeistspule eine LED mit Vorwiderstand $R_{17} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist.
+Sie sind für Stromstärken bis $4A$ ausgelegt, der über MOSFETs geschaltet wird.
+Zusätzlich ist zu jeder Arbeistspule eine LED mit Vorwiderstand $R_{16} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist.
 
 
 \section{Messwerterfassung und -verarbeitung}
 
 \subsection{Der Arduino}
 
-Um das Verhalten des Doppelpendels zu beeinflussen, muss der Zustand des Pendels
-erfasst werden können. Zu diesem Zweck verwenden wir einen am Ende des Pendels
-befestigten Magneten, der in am Rahmen montierten Spulen elektrische Ströme
-hervorruft, wenn er an diesen vorbeibewegt wird.
-
-Diese Ströme verursachen Spannungsschwankungen an den Spulen. Um diese zu messen,
+Um die Spannungsschwankungen an den Spulen zu messen,
 verbinden wir alle Spulen auf einer Seite mit einer 3,3 V"=Spannungsquelle und auf der
 anderen mit den 16 Analogeingängen eines ATmega2560"=Mikrocontrollers. Der auf einen
 Messbereich von 0 bis 5V eingestellte Mikrocontroller iteriert dann in einer Endlosschleife
@@ -66,7 +69,7 @@ Messbereich von 0 bis 5V eingestellte Mikrocontroller iteriert dann in einer End
 Auflösung von 10 Bit und leitet sie an einen Serial"=to"=USB"=Konverter weiter. Der Messbereich
 ist dadurch zwar relativ zur Grundspannung asymmetrisch --- der maximale negative Ausschlag beträgt
 theoretisch 3,3 V, während der maximale positive Ausschlag $ 5V - 3,3 V = 1.7 V $ beträgt ---, aber
-Spannungsregler für 3,3 V sind einfacher verfügbar als welche für 2,5 V.
+Spannungsregler für 3,3 V sind einfacher verfügbar als solche für 2,5 V.
 
 Der Serial"=to"=USB"=Konverter ist per USB an einen Computer angeschlossen, der die 5V--Stromversorgung
 bereitstellt und die Messwerte aufzeichnen und verarbeiten kann.
@@ -82,7 +85,7 @@ ATmega2560"=Mikrocontroller, einen weiteren ATmega"=Mikrocontroller mit USB als 
 Analogeingängen liest und über eine serielle Schnittstelle an den Microcontroller mit USB weitergibt, haben
 wir selbst in C geschrieben, um möglichst gute Kontrolle über die Geschwindigkeit des Programms
 zu haben, anstatt die Arduino"=spezifische Sprache zu verwenden, die auf
-einer höheren Ebene operiert.
+einer höheren Ebene operiert und langsamer ist.
 
 Die Programmierung auf einer solch niedrigen Ebene und das Lesen der Mikrocontroller"=Dokumentation
 haben gezeigt, dass 500000 Baud die ideale Datenübertragungsrate für die Kommunikation mit dem PC
@@ -109,16 +112,17 @@ Empfängerprogramms auf dem PC beispielsweise nach einem Neustart zu ermögliche
   \label{fig:network}
 \end{figure}
 
-Wir haben ein System aus Tools programmiert, die Informationen untereinander austauschen können, und jedes Programm erfüllt einen bestimmten Zweck.
-Im Flussdiagramm in Abbildung \ref{fig:network} ist zu erkennen, welche Daten ausgetauscht werden.
+Wir haben ein System aus Tools programmiert, die Informationen untereinander austauschen können. Jedes Programm erfüllt dabei möglichst genau einen bestimmten Zweck.
+Im Flussdiagramm in Abbildung \ref{fig:network} ist dargestellt, welche Daten wie ausgetauscht werden.
 Die durchgezogenen Pfeile sind Unix Domain Sockets, die gestrichelten Linien sind Dateien, die beim Programmstart geladen werden.
-
+Die Programme werden nun im Einzelnen beschrieben.
 
 \subsubsection{ArduinoReader}
+
 Der \app{ArduinoReader} verbindet sich über eine serielle Schnittstelle mit dem Arduino und liest die Daten aus, die der Arduino gemessen hat.
 Die Datensätze werden mit einem Zeitstempel versehen und über einen Unix Domain Socket sowohl an andere Programme weiter gesendet als auch in der Datei \app{ReplayFile} gespeichert.
-Ein Datensatz besteht aus 16 Zahlen im Bereich von 0 bis 1023, die die Messwerte für jede Spule angeben.
-Der Bereich diser Zahl wird von der 10"=Bit"=Genauigkeit des Analog"=Digital"=Wandlers vorgegeben.
+Ein Datensatz besteht aus 16 Zahlen im Bereich von 0 bis 1023, welche die Messwerte für jede Spule angeben.
+Der Bereich dieser Zahlen wird von der 10"=Bit"=Genauigkeit des Analog"=Digital"=Wandlers vorgegeben.
 Außerdem können Kommandos zum Schalten der digitalen Ausgänge an den \app{ArduinoReader} gesendet werden, die dann an den Arduino weitergeleitet werden.
 
 \subsubsection{Replayer}
@@ -146,7 +150,7 @@ Hier kann auch die Auswirkung der Arbeitsspulen auf die Messpulen beobachtet wer
 
 In Abbildung \ref{fig:screenrangetester} ist ein Screenshot der Anzeige zu sehen.
 Blau ist der Bereich markiert, in dem das Rauschen liegt.
-Die grünen Balken zeigen den aktuellen Wert relativ zum Durchschnittswert an und die roten Striche sind bei den Minima und Maxima der Spulen seitdem das Programm gestart wurde.
+Die grünen Balken zeigen den aktuellen Wert relativ zum Durchschnittswert an.
 
 \subsubsection{Tracker}
 Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{ArduinoReader} zu normalisieren und berechnet die magnetische Flussdichte zu jeder Spule.
@@ -160,7 +164,7 @@ norm = \frac{x - \mu}{n} \cdot \frac{R_S}{R_P}
 
 Der normalisierte Wert $norm$ ist jetzt für alle Spulen vergleichbar.
 Aus ihm wird dann ein Integral berechnet, das als magnetische Flussdichte interpretiert werden kann.
-Da die Messdaten ein Rauschen enthalten und der Analog"=Digital"=Wandler nicht perfekt linear arbeitet, konvergiert die Summme aller normalisierten Daten einer Spule schnell in den stark positiven oder stark negativen Bereich.
+Da die Messdaten ein Rauschen enthalten und der Analog"=Digital"=Wandler nicht perfekt linear arbeitet, konvergiert die Summe aller normalisierten Daten einer Spule schnell in den stark positiven oder stark negativen Bereich.
 Um diese Konvergenz zu beherrschen, werden die Integrale auf 0 zurückgesetzt, wenn in 50  aufeinanderfolgenden Datensätzen kein Messwert außerhalb des Rauschens lag.
 Sie werden auch zurückgesetzt, wenn ihr Wert kleiner 0 wird.
 
@@ -186,13 +190,14 @@ Zusätzlich versendet der \app{Tracker} den Index der Messspule mit dem größte
 \section{Vorhersage und Kontrolle des Systems}
 
 Der \app{Tracker} kann auch Manipulationen am System über die Arbeitsspulen vornehmen.
-Wenn der entsprechende Elektromagnet angeschaltet wird, wenn das Integral einer der Spulen $S_{12}$ oder $S_{13}$ sein Maximum erreicht hat, wird eine Kraft auf das System ausgeübt, sodass der Magnet verlangsamt wird.
+Wenn der entsprechende Elektromagnet angeschaltet wird, wenn das Integral einer der Spulen $S_{12}$ oder $S_{13}$ (das sind die untersten beiden Spulen) sein Maximum erreicht hat, wird eine Kraft auf das System ausgeübt, sodass der Magnet verlangsamt wird.
 Mit der Zeit bleibt das Pendel so schneller stehen.
 
 Die Vorhersage wird von dem Programm \app{MarkovPrediction} gemacht.
-Dazu werden die letzten drei Spulen, an denen der Magnet vorbeigekommen ist, gespeichert.
+Dazu werden die letzten drei Spulen, an denen der Magnet vorbeigekommen ist, zwischengespeichert.
 Wo der Magnet ist, wird vom \app{Tracker} abgefragt.
 Für jede neue Spule, an der das Pendel vorbeikommt, wird der Zustand des Systems ermittelt und in der Übergangsmatrix wird die Wahrscheinlichkeit für einen Übergang vom letzten Zustand in den aktuellen Zustand erhöht.
+So wird während Daten eingelesen werden die Übergangsmatrix immer weiter an die Eigenschaften des Pendels angepasst und die Vorhersage ist \textit{lernfähig.}
 
 Der Zustand besteht aus den letzten drei besuchten Spulen und der Geschwindigkeit des Pendels.
 Die Geschwindigkeit kann mithilfe der Zeitstempel und der Position der Spulen ungefähr bestimmt werden.
