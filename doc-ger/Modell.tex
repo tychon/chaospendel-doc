@@ -71,7 +71,7 @@ ist dadurch zwar relativ zur Grundspannung asymmetrisch --- der maximale negativ
 theoretisch 3,3 V, während der maximale positive Ausschlag $ 5V - 3,3 V = 1.7 V $ beträgt ---, aber
 Spannungsregler für 3,3 V sind einfacher verfügbar als solche für 2,5 V.
 
-Der Serial"=to"=USB"=Konverter ist per USB an einen Computer angeschlossen, der die 5V--Stromversorgung
+Der Serial"=to"=USB"=Konverter ist per USB an einen Computer angeschlossen, der die 5V--Strom"-ver"-sor"-gung
 bereitstellt und die Messwerte aufzeichnen und verarbeiten kann.
 
 Die 10"=Bit"=Auflösung des Mikrocontrollers bedeutet, dass die Schrittweite für die Digitalisierung
@@ -129,12 +129,6 @@ Außerdem können Kommandos zum Schalten der digitalen Ausgänge an den \app{Ard
 Anstatt des \app{Arduino"-Reader}s kann der \app{Re"-play"-er} eingesetzt werden, der vom \app{Arduino"-Reader} aufgezeichnete Daten abspielt.
 So können mehrere Analysen von gleichen Daten gemacht werden, oder es kann gearbeitet werden, ohne dass ein Arduino angeschlossen ist.
 
-\begin{wrapfigure}{r}{0.4\textwidth}
-  \includegraphics[width=0.4\textwidth]{images/rangetester.png}
-  \caption{Screenshot vom \app{Rangetester}}
-  \label{fig:screenrangetester}
-\end{wrapfigure}
-
 \subsubsection{Normalisation}
 Die \app{Normalisation} liest die Daten des \app{ArduinoReader}s und berechnet für jede Spule separat Durchschnittswerte und Standardabweichung.
 Zusätzlich werden noch der größte und der kleinste gemessene Wert aufgezeichnet, die das Rauschen eingrenzen.
@@ -142,6 +136,13 @@ Die Ergebnisse werden in die Datei \app{NoiseInfo} geschrieben.
 
 Dieses Programm wird ausgeführt, wenn sich das Pendel nicht bewegt.
 So kann später erkannt werden, ob Messwerte signifikant außerhalb des Rauschens liegen, und es können auch die Messwerte verschiedener Spulen verglichen werden.
+
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \includegraphics[width=0.4\textwidth]{images/rangetester-white.png}
+  \caption{Screenshot vom \app{Rangetester}}
+  \label{fig:screenrangetester}
+\end{wrapfigure}
 
 \subsubsection{Rangetester}
 Der \app{Rangetester} zeigt zu jeder Spule den aktuellen Messwert an.
@@ -153,7 +154,7 @@ Blau ist der Bereich markiert, in dem das Rauschen liegt.
 Die grünen Balken zeigen den aktuellen Wert relativ zum Durchschnittswert an.
 
 \subsubsection{Tracker}
-Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{ArduinoReader} zu normalisieren und berechnet die magnetische Flussdichte zu jeder Spule.
+Der \app{Tracker} benutzt die Daten aus der \app{NoiseInfo}-Datei, um Messdaten vom \app{Arduino"-Reader} zu normalisieren und berechnet die magnetische Flussdichte zu jeder Spule.
 
 Um einen Messwert $x$ zu normalisieren, wird als erstes der Durchschnittswert $\mu$ abgezogen und dann durch die Anzahl der Windungen $n$ geteilt.
 Das Ergebnis daraus wird mit dem Verhältnis des Eigenwiderstands der Spule $R_S$ zu dem Widerstandswert $R_P$ des parallel geschalteten Widerstands multipliziert:
