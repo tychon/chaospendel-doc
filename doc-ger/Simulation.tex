@@ -8,7 +8,7 @@ Hier hängt der weitere Verlauf stark von kleinen Unterschieden in Position und 
 
 Auf dieses Phänomen wird oft mit dem Ausdruck "`Schmetterlingseffekt"' Bezug genommen.
 Interessant ist, dass die Systeme eigentlich deterministisch sind und mithilfe der Startbedingungen aus den Newton'schen Gleichungen der weitere Verlauf vollständig berechnet werden könnte.
-Messfehler und Ungenauigkeiten in der Berechnung führen allerdings zu Fehlern, die sich in labilen Zuständen so stark auswirken, dass eine Simulation in sehr kurzer Zeit erheblich von der Realität abweicht.
+Messfehler und Ungenauigkeiten in der Berechnung führen allerdings zu Fehlern, die sich in labilen Zuständen so stark auswirken, dass eine Simulation nach sehr kurzer Zeit erheblich von der Realität abweicht.
 
 \subsection{Euler-Lagrange-Gleichung}
 Der Lösungsansatz über die Euler"=Lagrange"=Gleichung ist von der englischen Wikipedia übernommen worden.
@@ -44,7 +44,7 @@ k_3 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \intend r
 k_5 &= \int^{l_{2b}}_{l_{2a}} \rho_2(r) \; r \intend r \\
 \mathematikstop
 
-Die folgenden Formeln beschreiben die Energien, die später auch in der Simulation gezeigt werden, und die durch die Konstanten $k_1$ bis $k_5$ bestimmt sind. Diese Konstanten enstehen aus einer Integration über die Massenverteilung; beispielsweise wird $T_1 = \int^{l_{1b}}_{l_{1a}} \half \rho_1(r) (r \cdot \phid_1)^2 \intend r$, wo $\half \rho_1(r) (r \phid_1)^2$ die kinetische Energie eines Massenelements angibt, zu:
+Die folgenden Formeln beschreiben die Energien, die später auch in der Simulation gezeigt werden, und die durch die Konstanten $k_1$ bis $k_5$ bestimmt sind. Diese Konstanten entstehen aus einer Integration über die Massenverteilung; beispielsweise wird $T_1 = \int^{l_{1b}}_{l_{1a}} \half \rho_1(r) (r \cdot \phid_1)^2 \intend r$, wo $\half \rho_1(r) (r \phid_1)^2$ die kinetische Energie eines Massenelements angibt, zu:
 
 \mathematik
 T_1 &= \half k_1 \phid_1^2 & V_1 &= -g k_2 cos \phi_1 \\
@@ -80,7 +80,7 @@ Nach Auflösung zu den Ableitungen lauten die Differentialgleichungen wie folgt:
 \dot{p}_2 &= l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_5 sin \phi_2 \\[0.5\baselineskip]
 \mathematikstop
 
-Nun wird auf der rechten Seite der Gleichungen für $\dot{p}_1$ und $\dot{p}_2$ noch $\phid_1$ und $\phid_2$ durch die rechte Seite der ersten zwei Gleichungen ersetzt, um eine \TODO Form für die Berechnung mithilfe des Runge"=Kutta"=Verfahrens zu erreichen.
+Nun werden auf der rechten Seite der Gleichungen für $\dot{p}_1$ und $\dot{p}_2$ noch $\phid_1$ und $\phid_2$ durch die rechte Seite der ersten zwei Gleichungen ersetzt, um eine \TODO Form für die Berechnung mithilfe des Runge"=Kutta"=Verfahrens zu erreichen.
 
 \subsection{Numerische Simulation mit Haskell/C}
 
@@ -114,7 +114,7 @@ Die Transformation des zweiten Pendelarms zeigt eine starke Korrelation mit der 
 
 \subsection{Untersuchung auf Frequenzverdopplung}
 
-Wenn die Simulation sehr oft durchgeführt wird, und bei jeder Ausführung der Startwinkel $\phi_1$ um einen kleinen Schritt vergrößert wird, kann das Verhalten des Systems bei verschiedenen Energien untersucht werden.
+Wenn die Simulation sehr oft durchgeführt wird und bei jeder Ausführung der Startwinkel $\phi_1$ um einen kleinen Schritt vergrößert wird, kann das Verhalten des Systems bei verschiedenen Energien untersucht werden.
 Der Winkel des zweiten Pendelarms wird dabei immer mit der doppelten Größe initialisert: $\phi_2 = 2\phi_1$.
 In Abbildung \TODO ist ein Diagramm zu sehen, auf dem auf der vertikalen Achse die Positionen der Maxima aus der Fourieranalyse für die ersten sechs Sekunden der Simulation aufgetragen sind. Von links nach rechts wird $\phi_1$ linear von $0\;rad$ bis $\pi/4\;rad$ vergrößert.
 
