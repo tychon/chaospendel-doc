@@ -127,6 +127,12 @@ Ein Datensatz besteht aus 16 Zahlen im Bereich von 0 bis 1023, welche die Messwe
 Der Bereich dieser Zahlen wird von der 10"=Bit"=Genauigkeit des Analog"=Digital"=Wandlers vorgegeben.
 Außerdem können Kommandos zum Schalten der digitalen Ausgänge an den \app{ArduinoReader} gesendet werden, die dann an den Arduino weitergeleitet werden.
 
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \includegraphics[width=0.4\textwidth]{images/rangetester-white.png}
+  \caption{Screenshot vom \app{Rangetester}}
+  \label{fig:screenrangetester}
+\end{wrapfigure}
+
 \subsubsection{Replayer}
 Anstatt des \app{Arduino"-Reader}s kann der \app{Re"-play"-er} eingesetzt werden, der vom \app{Arduino"-Reader} aufgezeichnete Daten abspielt.
 So können mehrere Analysen von gleichen Daten gemacht werden, oder es kann gearbeitet werden, ohne dass ein Arduino angeschlossen ist.
@@ -138,13 +144,6 @@ Die Ergebnisse werden in die Datei \app{NoiseInfo} geschrieben.
 
 Dieses Programm wird ausgeführt, wenn sich das Pendel nicht bewegt.
 So kann später erkannt werden, ob Messwerte signifikant außerhalb des Rauschens liegen, und es können auch die Messwerte verschiedener Spulen verglichen werden.
-
-
-\begin{wrapfigure}{r}{0.4\textwidth}
-  \includegraphics[width=0.4\textwidth]{images/rangetester-white.png}
-  \caption{Screenshot vom \app{Rangetester}}
-  \label{fig:screenrangetester}
-\end{wrapfigure}
 
 \subsubsection{Rangetester}
 Der \app{Rangetester} zeigt zu jeder Spule den aktuellen Messwert an.
