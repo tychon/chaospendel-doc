@@ -7,6 +7,7 @@ NUMERICALFILES := $N/main.hs $N/RungeKutta.hs $N/stats.awk $N/show.py
 
 numerical: $(NUMERICALFILES)
 	a2ps $(APSOPTS) $^ --output numerical.ps
+	ps2pdf numerical.ps
 
 N := ../chaospendel/network
 NETWORKFILES := $N/makefile
@@ -22,3 +23,4 @@ NETWORKFILES += $N/run.sh
 
 network: $(NETWORKFILES)
 	a2ps $(APSOPTS) $^ --output network.ps
+	ps2pdf network.ps
