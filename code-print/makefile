@@ -1,6 +1,6 @@
 APSOPTS := --left-title --left-footer --footer --line-numbers 1 --toc --file-align fill
 
-all: numerical network
+all: numerical network arduino
 
 N := ../chaospendel/numerical
 NUMERICALFILES := $N/main.hs $N/RungeKutta.hs $N/stats.awk $N/show.py
@@ -24,3 +24,11 @@ NETWORKFILES += $N/run.sh
 network: $(NETWORKFILES)
 	a2ps $(APSOPTS) $^ --output network.ps
 	ps2pdf network.ps
+
+N := ../chaospendel/arduino_read/native_arduino_code
+ARDUINOFILES := $N/makefile
+ARDUINOFILES += $N/native_adc_to_serial.c
+
+arduino: $(ARDUINOFILES)
+	a2ps $(APSOPTS) $^ --output arduino.ps
+	ps2pdf arduino.ps
