@@ -13,4 +13,6 @@ You need some different programs to get the makefile in doc-ger/ running:
 * python
 * ImageMagick: convert
 * dia
+* a2ps
+* ps2pdf
 
