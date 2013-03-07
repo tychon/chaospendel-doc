@@ -16,7 +16,20 @@
    inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="pendel_modell_beschriftet.svg">
   <defs
-     id="defs4" />
+     id="defs4">
+    <filter
+       inkscape:collect="always"
+       id="filter3801"
+       x="-0.28858538"
+       width="1.5771708"
+       y="-0.2959223"
+       height="1.5918446">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="20.791709"
+         id="feGaussianBlur3803" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,13 +38,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.69977474"
-     inkscape:cx="661.41843"
+     inkscape:cx="358.4638"
      inkscape:cy="520.82202"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1798"
-     inkscape:window-height="1006"
+     inkscape:window-width="1278"
+     inkscape:window-height="1005"
      inkscape:window-x="0"
      inkscape:window-y="17"
      inkscape:window-maximized="0" />
@@ -43,7 +56,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -288,5 +301,42 @@
          x="1223.2509"
          y="599.32703"
          id="tspan4029">Messspulen</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:#666666;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3019"
+       sodipodi:cx="305.09818"
+       sodipodi:cy="197.80147"
+       sodipodi:rx="10.717734"
+       sodipodi:ry="11.43225"
+       d="m 315.81591,197.80147 a 10.717734,11.43225 0 1 1 -21.43547,0 10.717734,11.43225 0 1 1 21.43547,0 z"
+       transform="translate(255.7966,265.79979)" />
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:#000000;font-family:Sans"
+       x="357.25781"
+       y="293.54654"
+       id="text3021"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3023"
+         x="357.25781"
+         y="293.54654">Magnet</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 517.30933,299.26269 42.87094,162.90957"
+       id="path3025"
+       inkscape:connector-curvature="0"
+       transform="translate(0,-2.988066e-5)" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.32894736;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3801)"
+       id="path3795"
+       sodipodi:cx="253.65306"
+       sodipodi:cy="142.06924"
+       sodipodi:rx="86.45639"
+       sodipodi:ry="84.312843"
+       d="m 340.10945,142.06924 a 86.45639,84.312843 0 1 1 -172.91278,0 86.45639,84.312843 0 1 1 172.91278,0 z"
+       transform="matrix(0.47332377,0,0,0.43426877,436.3532,401.01637)" />
   </g>
 </svg>
