@@ -1,7 +1,7 @@
 
 .PHONY: charts all clean
 
-DOCS := Dokumentation.pdf Herleitung_standalone.pdf
+DOCS := Dokumentation.pdf
 SECDOCS := Simulation.tex Modell.tex
 BIBL := Dokumentation.bbl
 

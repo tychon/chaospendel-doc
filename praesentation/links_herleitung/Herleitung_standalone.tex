@@ -1,9 +1,10 @@
-\documentclass[a4paper, 12pt]{article}
+\documentclass[a3paper, 12pt, landscape]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ngerman, lmodern}
+\usepackage[left=1cm, right=1cm, top=2cm, bottom=2cm]{geometry}
 
-\usepackage{color, amsmath, amsthm}
+\usepackage{color, amsmath, amsthm, caption}
 \usepackage{fancyhdr}
   \lhead{}
   \chead{}
@@ -11,6 +12,14 @@
   \lfoot{}
   \cfoot{\thepage}
   \rfoot{}
+\usepackage{multicol}
+\columnseprule0.4pt
+\columnsep1cm
+
+\usepackage{graphicx}
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
 
 \newcommand{\TODO}{\textcolor{red}{ \textbf TODO }}
 \newcommand{\mathematik}{\begin{equation*}\begin{aligned}}
@@ -22,15 +31,28 @@
 \newcommand{\intend}{\,\mathrm{d}} % end of integral
 \newcommand{\EQU}{\qquad\bigg|\,} % separator for explanations for equivalent rearrangements
 
-\title{Herleitung der Differentialgleichungen}
+\title{\fontsize{50pt}{120pt}\selectfont Euler-Lagrange-Gleichungen des Doppelpendels}
 \author{ }
 \date{ }
 
 \begin{document}
 
+\LARGE
 \maketitle
 
+\begin{multicols}{2}
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.8\textwidth]{links_mathsketch_dia.png}
+\captionof{figure}{\Large Bedeutung der Variablen}
+\end{Figure}
+\columnbreak
+
 \input{Herleitung.tex}
+%\columnbreak\strut % avoid opening of second column
+\end{multicols}
+
 
 \end{document}
 
