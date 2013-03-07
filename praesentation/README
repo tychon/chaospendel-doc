@@ -1,0 +1,6 @@
+
+### Was liegt wo?
+
+* Toplevel: Alle Dateien, die nicht in der .gitignore sind (dazu mit Präfix, wo sie hin sollen)
+* image: Alle Dateien, die eigentlich ignoriert werden, und deswegen explizit nicht ignoriert werden muessen.
+
