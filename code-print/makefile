@@ -6,8 +6,8 @@ N := ../chaospendel/numerical
 NUMERICALFILES := $N/main.hs $N/RungeKutta.hs $N/stats.awk $N/show.py
 
 numerical: $(NUMERICALFILES)
-	a2ps $(APSOPTS) $^ --output numerical.ps
-	ps2pdf numerical.ps
+	a2ps $(APSOPTS) $^ --output code_numerical.ps
+	ps2pdf code_numerical.ps
 
 N := ../chaospendel/network
 NETWORKFILES := $N/makefile
@@ -22,13 +22,13 @@ NETWORKFILES += $N/tracker.c $N/markov_prediction.c
 NETWORKFILES += $N/run.sh
 
 network: $(NETWORKFILES)
-	a2ps $(APSOPTS) $^ --output network.ps
-	ps2pdf network.ps
+	a2ps $(APSOPTS) $^ --output code_network.ps
+	ps2pdf code_network.ps
 
 N := ../chaospendel/arduino_read/native_arduino_code
 ARDUINOFILES := $N/makefile
 ARDUINOFILES += $N/native_adc_to_serial.c
 
 arduino: $(ARDUINOFILES)
-	a2ps $(APSOPTS) $^ --output arduino.ps
-	ps2pdf arduino.ps
+	a2ps $(APSOPTS) $^ --output code_arduino.ps
+	ps2pdf code_arduino.ps
