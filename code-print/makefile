@@ -1,4 +1,4 @@
-APSOPTS := --left-title --left-footer --footer --line-numbers 1 --toc --file-align fill
+APSOPTS := --header --left-title --left-footer --footer --line-numbers 1 --toc --file-align fill
 
 all: numerical network arduino
 
