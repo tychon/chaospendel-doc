@@ -1,8 +1,9 @@
 
 \section{Die Bewegung des Doppelpendels}
 \subsection{Was ist ein chaotisches System?}
-Systeme sind chaotisch, wenn sie in ihren Freiheitsgraden in labile Zustände gelangen können.
-Ein Doppelpendel hat vier Freiheitsgrade: zwei Winkel und zwei Impulse.
+Typische Eigenschaften von chaotischen Systemen sind, dass sie mindestens drei Freiheitsgrade besitzen, ihre zugehörigen Differentialgleichungen nicht linear sind und dass es labile Zustände gibt. \citep{wikichaos}
+Ein Doppelpendel hat auf den ersten Blick vier Freiheitsgrade: zwei Winkel und zwei Impulse.
+Falls man allerdings Reibung und ähnliches außen vor lässt, gilt in dem abgeschlossenen System der Energieerhaltungssatz, sodass ein Freiheitsgrad verschwindet.
 Ein typischer labiler Zustand liegt zum Beispiel vor, wenn das Pendel mit einem sehr geringen Impuls fast senkrecht nach oben zeigt.
 Hier hängt der weitere Verlauf stark von kleinen Unterschieden in Position und Impuls ab.
 
@@ -82,6 +83,8 @@ Nach Auflösung zu den Ableitungen lauten die Differentialgleichungen wie folgt:
 Nun werden auf der rechten Seite der Gleichungen für $\dot{p}_1$ und $\dot{p}_2$ noch $\phid_1$ und $\phid_2$ durch die rechte Seite der ersten zwei Gleichungen ersetzt, um eine Standardform für die Berechnung mithilfe des Runge"=Kutta"=Verfahrens zu erreichen.
 
 \subsection{Linearisierung der Bewegungsgleichungen}
+%TODO linearisierung
+%TODO theoretische bestimmung der eigenfrequenzen
 
 \subsection{Numerische Simulation mit Haskell/C}
 
