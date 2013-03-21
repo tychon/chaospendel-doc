@@ -50,19 +50,16 @@ Die folgenden Formeln beschreiben die Energien, die später auch in der Simulati
 
 \mathematik
 T_1 &= \half k_1 \phid_1^2 & V_1 &= -g k_2 cos \phi_1 \\
-T_2 &= \half l_1 k_3 \phid_1^2 + \half k_4 \phid_2^2 + l_1 \phid_1 \phid_2 k_5 cos(\phi_1 - \phi_2) & V_2 &= -g l_1 k_3 cos \phi_1 - g k_5 cos \phi_2 \\
+T_2 &= \half l_1^2 k_3 \phid_1^2 + \half k_4 \phid_2^2 + l_1 \phid_1 \phid_2 k_5 cos(\phi_1 - \phi_2) & V_2 &= -g l_1 k_3 cos \phi_1 - g k_5 cos \phi_2 \\
 \mathematikstop
-\mathematik
-T_{Ges} &= T_1 + T_2\\
- V_{Ges} &= V_1 + V_2 \\
-E_{Ges} &= T_{Ges} + V_{Ges}\\
-\mathematikstop
+
+Die Gesamtenergie im System beträgt $E = T_1 + T_2 + V_1 + V_2$.
 
 Die Lagrange-Funktion $L$ ist dann:
 
 \mathematik
-L &= && T_{Ges} - V_{Ges} \\
-  &= && \half  \phid_1^2 k_1 + \half l_1 \phid_1^2 k_3 + \half \phid_2^2 k_4 + l_1 \phid_1 \phid_2 k_5 cos(\phi_1 - \phi_2) \\
+L &= && T_1 + T_2 - (V_1 + V_2) \\
+  &= && \half  \phid_1^2 k_1 + \half l_1^2 \phid_1^2 k_3 + \half \phid_2^2 k_4 + l_1 \phid_1 \phid_2 k_5 cos(\phi_1 - \phi_2) \\
   &&& + g k_2  cos \phi_1 + g l_1 k_3 cos \phi_1 + g k_5 cos \phi_2
 \mathematikstop
 
@@ -76,8 +73,8 @@ Daraus ergeben sich folgende Euler-Lagrange-Gleichungen:
 Nach Auflösung zu den Ableitungen lauten die Differentialgleichungen wie folgt:
 
 \mathematik
-\phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
-\phid_2 &= \frac{k_1 p_2 + l_1 \cdot (k_3 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1 \cdot (k_3 k_4 - k_5^2 l_1 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
+\phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2 cos(\phi_1 - \phi_2)}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
+\phid_2 &= \frac{k_1 p_2 + l_1 \cdot (k_3 l_1 p_2 - k_5 p_1 cos(\phi_1 - \phi_2))}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2 cos^2(\phi_1 - \phi_2))} \\[0.5\baselineskip]
 \dot{p}_1 &= -l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_2 sin \phi_1 - g l_1 k_3 sin \phi_1 \\[0.5\baselineskip]
 \dot{p}_2 &= l_1 \phid_1 \phid_2 k_5 sin(\phi_1 - \phi_2) - g k_5 sin \phi_2 \\[0.5\baselineskip]
 \mathematikstop
