@@ -18,4 +18,5 @@
 *octave-core
 
 !doc-ger/images/*
+!doc-ger/images/*/*
 !praesentation/images/*
