@@ -156,7 +156,7 @@ Die dicken grünen Balken rechts daneben zeigen auf einer für alle dicken Balke
 Der blaue Stricht zeigt die Nulllinie an, die roten Striche die Anfangswerte der Energien.
 Die potentielle Energie ist anfangs kleiner als null, weil der Koordinatenurspung in der ersten Achse liegt und damit die Schwerpunkte der Pendelarme unterhalb des Bezugspunkts liegen.
 Die Gesamtenergie $E_{Ges}$ sollte bei einer perfekten Simulation nicht von ihrem Anfangswert abweichen.
-Werden die Schrittweiten für das Runge"=Kutta"=Verfahren kleiner als 10 Millisekunden gewählt, bleibt die Gesamtenergie in den ersten 60 Sekunden auch noch bis 8 Stellen nach dem Komma konstant. \TODO jann?
+Werden die Schrittweiten für das Runge"=Kutta"=Verfahren kleiner als 10 Millisekunden gewählt, bleibt die Gesamtenergie in den ersten 60 Sekunden auch noch bis 8 Stellen nach dem Komma konstant.
 
 Rechts neben den dicken Balken ist die diskrete Fourier"=Transformation der Winkel zu sehen.
 Oberhalb der blauen Linie wird die Transformation von $\phi_1$ angezeigt, unterhalb die Transformation von $\phi_2$.
@@ -239,7 +239,7 @@ als Simulationsdauer gewählt ---, ist es notwendig, die Simulationen sehr schne
 C-Implementierung gearbeitet, die bereits weiter oben angesprochen wurde. Da aber auch diese auf einem Kern einer AMD-Brisbane-4400+-CPU
 (Taktrate 2,3GHz) ca. 40 Minuten für die Simulation von 5000 Durchläufen benötigt, haben wir den C-Code für OpenCL umgeschrieben, sodass er
 parallelisiert auf GPUs funktioniert. GPUs sind darauf optimiert, nach dem SIMD-Prinzip (Single Instruction, Multiple Data) zu arbeiten, das heißt, sie
-können eine Operation parallel auf viele Datensätze anwenden. Das passt zu unserem Problem, denn wir wollen die immer mit den gleichen
+können eine Operation parallel auf viele Datensätze anwenden\citep{gpuwiki}. Das passt zu unserem Problem, denn wir wollen die immer mit den gleichen
 Operationen durchgeführte Simulation des Pendels mit vielen verschiedenen Startwerten laufen lassen. Mit dieser Methode erreichen wir auf einer
 Radeon-HD-5750-Grafikkarte durch die SIMD-Ausführung des Codes Simulationsgeschwindigkeiten von ca. einer Minute für 5000 Durchläufe, was eine
 Verbesserung um $97.5\%$ darstellt.

@@ -69,7 +69,7 @@ verbinden wir alle Spulen auf einer Seite mit einer 3,3 V"=Spannungsquelle und a
 anderen mit den 16 Analogeingängen eines ATmega2560"=Mikrocontrollers. Der auf einen
 Messbereich von 0 bis 5V eingestellte Mikrocontroller iteriert dann in einer Endlosschleife
 über alle Eingänge, misst die an ihnen momentan anliegenden Spannungen mit einer
-Auflösung von 10 Bit und leitet sie an einen Serial"=to"=USB"=Konverter weiter. Der Messbereich
+Auflösung von 10 Bit \citep[S. 275]{atmegadatasheet} und leitet sie an einen Serial"=to"=USB"=Konverter weiter. Der Messbereich
 ist dadurch zwar relativ zur Grundspannung asymmetrisch --- der maximale negative Ausschlag beträgt
 theoretisch 3,3 V, während der maximale positive Ausschlag $ 5V - 3,3 V = 1.7 V $ beträgt ---, aber
 Spannungsregler für 3,3 V sind einfacher verfügbar als solche für 2,5 V.
@@ -84,7 +84,7 @@ Grundrauschen mit einer Breite von ca. 50mV auftritt, ist die Genauigkeit der Me
 Aus Gründen der Einfachheit --- Atmel--Mikrocontroller mit USB"=Schnittstelle sind nur als SMD--Chips
 verfügbar ---, haben wir uns dazu entschlossen, ein Arduino"=Mega"=2560"=Board zu nutzen, das einen
 ATmega2560"=Mikrocontroller, einen weiteren ATmega"=Mikrocontroller mit USB als Serial"=to"=USB"=Converter und eine 
-3,3 V"=Spannungsquelle enthält. Das Programm für den ATmega2560, das die Messwerte von den
+3,3 V"=Spannungsquelle enthält\citep{arduinowiki}. Das Programm für den ATmega2560, das die Messwerte von den
 Analogeingängen liest und über eine serielle Schnittstelle an den Microcontroller mit USB weitergibt, haben
 wir selbst in C geschrieben, um möglichst gute Kontrolle über die Geschwindigkeit des Programms
 zu haben, anstatt die Arduino"=spezifische Sprache zu verwenden, die auf
