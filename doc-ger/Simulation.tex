@@ -84,8 +84,56 @@ Nach Auflösung zu den Ableitungen lauten die Differentialgleichungen wie folgt:
 Nun werden auf der rechten Seite der Gleichungen für $\dot{p}_1$ und $\dot{p}_2$ noch $\phid_1$ und $\phid_2$ durch die rechte Seite der ersten zwei Gleichungen ersetzt, um eine Standardform für die Berechnung mithilfe des Runge"=Kutta"=Verfahrens zu erreichen.
 
 \subsection{Linearisierung der Bewegungsgleichungen}
-%TODO linearisierung
-%TODO theoretische bestimmung der eigenfrequenzen
+
+Für sehr kleine Auslenkungen $a < 5^\circ$ können die Differentialgleichungen linearisiert werden, indem durch die Annäherungen $cos(\alpha) \approx 1$ und $sin(\alpha) \approx \alpha$ die nicht linearen Anteile eliminiert werden.
+Nach weiterem Ableiten und Einsetzen können die Gleichungen in diese Form gebracht werden:
+
+\mathematik
+\phidd_1 &= a \phi_1 + b \phi_2\\
+\phidd_2 &= c \phi_1 + d \phi_2
+\mathematikstop
+\mathematik
+a &= \frac{-g k_4 (k_2 + l_1 k_3)}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2 cos^2(\phi_1 - \phi_2))}
+& b &= \frac{g k_5^2 l_1}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2 cos^2(\phi_1 - \phi_2))}\\
+c &= \frac{g k_5 l_1 (k_2 + k_3 l_1)}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2 cos^2(\phi_1 - \phi_2))}
+& d &= \frac{-g k_5 (k_1 + k_3 l_1^2)}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2 cos^2(\phi_1 - \phi_2))}
+\mathematikstop
+
+Über den Ansatz
+
+\mathematik
+\phi_1 &= A_1 sin\, \omega t
+& \phi_2 &= A_2 sin\, \omega t \\
+\phidd_1 &= - \omega^2 A_1 sin\, \omega t
+& \phidd_2 &= - \omega^2 A_2 sin\, \omega t \\
+\mathematikstop
+
+kommt man zu der Matrizengleichungung:
+
+\mathematik
+\begin{pmatrix}0 \\ 0\end{pmatrix} &=
+\begin{pmatrix}
+a+\omega^2 & b\\
+c & d+\omega^2
+\end{pmatrix}
+\begin{pmatrix}A_1 \\ A_2\end{pmatrix}
+\mathematikstop
+
+Da diese Gleichung nur lösbar ist, wenn die Determinante der Koeffizentenmatrix Null ist, muss diese quadratische Gleichung gelten:
+
+\mathematik
+(a + \omega^2) \cdot (d + \omega^2) - b \cdot c = 0
+\mathematikstop
+
+Diese Gleichung hat zwei Lösungen $\omega_1$ und $\omega_2$, die durch $f=\frac{\omega}{2\pi}$ in die Frequenzen umgerechnet werden können.
+
+Die Maße unseres Pendels, und die Koeffizienten mit einer geschätzten Dichtefunktion lauten:
+\mathematik
+l1a &= -0,1 & l1b &= 0,3 & l1 &= 0,285 & l2a &= -0,11 & lb2 &= 0,19\\
+k1 &= 0,0284 & k2 &= 0,118 & k3 &= 0,5 & k4 &= 0,00441 & k5 &= 0,0254
+\mathematikstop
+
+Werden diese Wert eingesetzt, kommt man auf die Frequenzen $0,88 Hz$ und $1,46 Hz$.
 
 \subsection{Numerische Simulation mit Haskell/C}
 
