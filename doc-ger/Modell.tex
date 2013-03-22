@@ -190,6 +190,13 @@ Dann ist nämlich wahrscheinlich eine Arbeitsspule umgeschaltet worden, die alle
 
 Zusätzlich versendet der \app{Tracker} den Index der Messspule mit dem größten Integral über einen Unix Domain Socket.
 
+\subsection{Latenzmessung}
+
+Wie oben schon gesagt ist der Analog"=Digital"=Wandler der langsamste Teil des Aufbaus.
+Aus der Samplerate von 555 Samples pro Sekunde die am Computer gemessen kann auf die Ausleserate vom ADC geschlossen werden, nämlich $0.11 ms / Sample$.
+
+Die Latenz ist die Zeit, die zwischen den beiden Ereignissen vergeht, dass der Magnet mit einer Spule wechselwirkt und der Computer das registriert.
+
 \TODO Round Trip Time (jann?) %TODO
 
 \section{Vorhersage und Kontrolle des Systems}
