@@ -186,7 +186,7 @@ Zusätzlich versendet der \app{Tracker} den Index der Messspule mit dem größte
 Bei der Beeinflussung muss beachtet werden, dass die Latenz (Verzögerung) der Mess- und Steuerdaten zwischen den Mess- und Beeinflussungsspulen
 und dem Computer nicht zu groß ist, denn eine zu hohe Latenz führt dazu, dass die Beeinflussung zu stark zeitversetzt zur echten Pendelbewegung
 passiert.
-Beim Zuführen von Energie in das System hätte dies beispielsweise zur Folge, dass die Beeinflussungsspule den Magneten erst abstößt, wenn er sich bereits ein Stück weit entfernt hat, wodurch die Beeinflussung weniger stark ausfallen würde.
+Beim Zuführen von Energie in das System hätte dies zum Beispiel zur Folge, dass die Beeinflussungsspule den Magneten erst abstößt, wenn er sich bereits ein Stück weit entfernt hat, wodurch die Beeinflussung weniger stark ausfiele.
 Um herauszufinden, ob dies für unseren Aufbau relevant ist, haben wir eine Messung der Round"=Trip"=Time durchgeführt.
 
 Als Round"=Trip"=Time wird die Zeit bezeichnet, die ein Signal benötigt, um von einem System zum anderen und wieder zurück zu gelangen, also in
@@ -215,9 +215,9 @@ Wo der Magnet ist, wird vom \app{Tracker} abgefragt.
 Für jede neue Spule, an der das Pendel vorbeikommt, wird der Zustand des Systems ermittelt und in der Übergangsmatrix wird die Wahrscheinlichkeit für einen Übergang vom letzten Zustand in den aktuellen Zustand erhöht.
 So wird, während Daten eingelesen werden, die Übergangsmatrix immer weiter an die Eigenschaften des Pendels angepasst und die Vorhersage ist \textit{lernfähig}.
 
-Der Zustand besteht aus den letzten drei besuchten Spulen und der Geschwindigkeit des Pendels.
-Die Geschwindigkeit kann mithilfe der Zeitstempel und der Position der Spulen ungefähr bestimmt werden.
-Diese Information wird in eine Zahl codiert, wobei die Geschwindigkeit zuvor in einen von fünf Bereichen eingeordnet wurde.
+Der Zustand besteht aus den letzten drei bekannten Positionen des Pendels
+und seiner Geschwindigkeit, die mithilfe der Zeitstempel und der Position der Spulen ungefähr bestimmt werden kann.
+Diese Information wird in eine Zahl codiert, wobei die Geschwindigkeit zuvor in einen von fünf Bereichen eingeordnet wird.
 
 \begin{figure}[hbt]
   \centering
@@ -239,9 +239,9 @@ Der codierte Index des Zustands ist nun:
 2 \cdot 16^3 + 14 \cdot 16^2 + 15 \cdot 16 + 7 = 12023
 \mathematikstop
 
-Dieser codierte Index repräsentiert den aktuellen Zustand und stellt den Index in der Übergangsmatrix dar, an dem Wahrscheinlichkeiten für den nächsten Zustand gespeichert werden.
-Der wahrscheinlichste nächste Zustand hat den Code 8049, also wird wahrscheinlich die Spule mit einer Geschwindigkeit zwischen $0,3 m/s$ und $0,6 m/s$ an der Spule mit dem Index eins vorbeikommen.
-Dies ist auch in der Abbildung als blauer Pfad zu erkennen.
+Diese Zahl repräsentiert den aktuellen Zustand und stellt den Index in der Übergangsmatrix dar, an dem Wahrscheinlichkeiten für den nächsten Zustand gespeichert werden.
+Der wahrscheinlichste nächste Zustand hat den Code 8049, also wird wahrscheinlich der Magnet mit einer Geschwindigkeit zwischen $0,3 m/s$ und $0,6 m/s$ an der Spule mit dem Index eins vorbeikommen.
+Dies ist auch in der Abbildung als blauer Pfad erkennbar.
 
 Da es so $16^3 \cdot 5 = 20480$ verschiedene codierte Zustände gibt, ist die Übergangsmatrix relativ groß.
 Sie kann in einer Datei gespeichert werden, damit mehr Übergänge eingetragen werden können, nachdem das Programm neu gestartet wurde, und damit sie auch nach einem Neustart weiterhin zur Vorhersage
