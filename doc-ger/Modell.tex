@@ -50,14 +50,14 @@ Dort sind Spulen mit einer Windungszahl von 1600 Windungen rot und Spulen mit 20
 \end{figure}
 
 Im Schaltplan in Abbildung \ref{fig:circuit} ist zu sehen, wie die Messspulen $S_0$ bis $S_{15}$ an die analogen Eingänge des Arduino angeschlossen werden.
-Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Vorwiderstand von $R_0 = 3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben.
+Anders als die roten Spulen, die ohne Widerstand auskommen, sind die grünen Spulen mit jeweils einem Widerstand von $R_0 = 3,3 k\Omega$ parallel geschaltet, um die höhere erzeugte Spannung auszugleichen, da sie mehr Windungen haben.
 Ohne diese Widerstände würden sie machmal Spannungen außerhalb des Messbereichs erzeugen, was die Messelektronik durcheinander brächte.
 
 \subsection{Arbeitsspulen zur Chaoskontrolle}
 
 Die zwei Arbeitsspulen $S_{16}$ und $S_{17}$ sind direkt gegenüber der untersten beiden Messspulen angebracht und haben jeweils 300 Windungen.
 Sie sind für Stromstärken bis $4A$ ausgelegt und werden über MOSFETs geschaltet.
-Zusätzlich ist zu jeder Arbeistspule eine LED mit Vorwiderstand $R_{16} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist.
+Zusätzlich ist zu jeder Arbeitsspule eine LED mit Vorwiderstand $R_{16} = 1,8 k\Omega$ parallel geschaltet, um einfacher erkennen zu können, ob die Spule eingeschaltet ist.
 
 
 \section{Messwerterfassung und -verarbeitung}
@@ -213,7 +213,7 @@ Die Vorhersage wird von dem Programm \app{MarkovPrediction} gemacht.
 Dazu werden die letzten drei Spulen, an denen der Magnet vorbeigekommen ist, zwischengespeichert.
 Wo der Magnet ist, wird vom \app{Tracker} abgefragt.
 Für jede neue Spule, an der das Pendel vorbeikommt, wird der Zustand des Systems ermittelt und in der Übergangsmatrix wird die Wahrscheinlichkeit für einen Übergang vom letzten Zustand in den aktuellen Zustand erhöht.
-So wird, während Daten eingelesen werden, die Übergangsmatrix immer weiter an die Eigenschaften des Pendels angepasst und die Vorhersage ist \textit{lernfähig.}
+So wird, während Daten eingelesen werden, die Übergangsmatrix immer weiter an die Eigenschaften des Pendels angepasst und die Vorhersage ist \textit{lernfähig}.
 
 Der Zustand besteht aus den letzten drei besuchten Spulen und der Geschwindigkeit des Pendels.
 Die Geschwindigkeit kann mithilfe der Zeitstempel und der Position der Spulen ungefähr bestimmt werden.
@@ -253,6 +253,6 @@ In manchen regelmäßigen Bewegungen nähert sich die Genauigkeit $100\%$, aber 
 
 Mit der Vorhersage wird es möglich, immer mehr Energie in das System zu bringen.
 Wird vorhergesagt, das Pendel sei im nächsten Zustand an Spule $S_{12}$ oder $S_{13}$, kann der entprechende Elektromagnet angeschaltet werden, bevor das Pendel dort ist.
-So wird das Pendel beschleunigt, bis die gemessene Magnetische Flussdichte ein Maximum erreicht und der Elektromagnet abgeschaltet wird.
+So wird das Pendel beschleunigt, bis die gemessene magnetische Flussdichte ein Maximum erreicht und der Elektromagnet abgeschaltet wird.
 Auch hier muss darauf geachtet werden, dass durch das Umschalten der Arbeitsspule mehrere Datensätze verfälscht werden und aussortiert werden müssen.
 
