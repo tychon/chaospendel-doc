@@ -93,11 +93,11 @@ einer höheren Ebene operiert und langsamer ist.
 Die Programmierung auf einer solch niedrigen Ebene und das Lesen der Mikrocontroller"=Dokumentation
 haben gezeigt, dass 500000 Baud die ideale Datenübertragungsrate für die Kommunikation mit dem PC
 sind, da bei diesem Wert der Frequenzteiler für die serielle Datenübertragung genau 1 wird.
-Tests mit dem in C geschriebenen Programm für den Mikrocontroller haben gezeigt, dass bei
+Tests mit dem Programm für den Mikrocontroller haben gezeigt, dass bei
 dieser Baudrate die
 parallel zur seriellen Datenübertragung ablaufende Analog"=Digital"=Wandlung die langsamste
 Komponente ist, weshalb es ohne Leistungseinbußen möglich ist, für die Übertragung
-der Messwerte an den PC ein Protokoll mit hoher Redundanz zu verwenden.
+der Messwerte an den PC ein Protokoll mit Redundanz zu verwenden.
 
 Das Protokoll zwischen Mikrocontroller und PC überträgt Messwerte als Kombination aus
 Eingangs--ID und Messwert mit hoher Redundanz, sodass fehlerhafte oder
@@ -116,7 +116,7 @@ Empfängerprogramms auf dem PC beispielsweise nach einem Neustart zu ermögliche
   \label{fig:network}
 \end{figure}
 
-Wir haben ein System aus Tools programmiert, die Informationen untereinander austauschen können. Jedes Programm erfüllt dabei möglichst genau einen bestimmten Zweck.
+Wir haben ein System aus Tools programmiert, die Daten untereinander austauschen können. Jedes Programm erfüllt dabei möglichst genau einen bestimmten Zweck.
 Im Flussdiagramm in Abbildung \ref{fig:network} ist dargestellt, welche Daten wie ausgetauscht werden.
 Die durchgezogenen Pfeile sind Unix Domain Sockets, die gestrichelten Linien sind Dateien, die beim Programmstart geladen werden.
 Die Programme werden nun im Einzelnen beschrieben.
@@ -154,7 +154,7 @@ Hier kann auch die Auswirkung der Arbeitsspulen auf die Messpulen beobachtet wer
 
 
 In Abbildung \ref{fig:screenrangetester} ist ein Screenshot der Anzeige zu sehen.
-Blau ist der Bereich markiert, in dem das Rauschen liegt.
+Der Bereich, in dem das Rauschen liegt, ist blau markiert.
 Die grünen Balken zeigen den aktuellen Wert relativ zum Durchschnittswert an.
 
 \subsubsection{Tracker}

@@ -241,7 +241,7 @@ C-Implementierung gearbeitet, die bereits weiter oben angesprochen wurde. Da abe
 parallelisiert auf GPUs funktioniert. GPUs sind darauf optimiert, nach dem SIMD-Prinzip (Single Instruction, Multiple Data) zu arbeiten, das heißt, sie
 können eine Operation parallel auf viele Datensätze anwenden\citep{gpuwiki}. Das passt zu unserem Problem, denn wir wollen die immer mit den gleichen
 Operationen durchgeführte Simulation des Pendels mit vielen verschiedenen Startwerten laufen lassen. Mit dieser Methode erreichen wir auf einer
-Radeon-HD-5750-Grafikkarte durch die SIMD-Ausführung des Codes Simulationsgeschwindigkeiten von ca. einer Minute für 5000 Durchläufe, was eine
+Radeon-HD-5750-Grafikkarte Simulationsgeschwindigkeiten von ca. einer Minute für 5000 Durchläufe, was eine
 Verbesserung um $97.5\%$ darstellt.
 
 In Abbildung \ref{fig:fraktale} ist das Ergebnis von drei mal 90000 Durchführungen der Simulation mit 60 Sekunden Simulationszeit zu sehen.
