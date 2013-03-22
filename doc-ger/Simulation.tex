@@ -1,7 +1,7 @@
 
 \section{Die Bewegung des Doppelpendels}
 \subsection{Was ist ein chaotisches System?}
-Typische Eigenschaften von chaotischen Systemen sind, dass sie mindestens drei Freiheitsgrade besitzen, ihre zugehörigen Differentialgleichungen nicht linear sind und dass es labile Zustände gibt. \citep{wikichaos}
+Typische Eigenschaften von chaotischen Systemen sind, dass sie mindestens drei Freiheitsgrade besitzen, ihre zugehörigen Differentialgleichungen nichtlinear sind und dass es labile Zustände gibt. \citep{wikichaos}
 Ein Doppelpendel hat auf den ersten Blick vier Freiheitsgrade: zwei Winkel und zwei Impulse.
 Falls man allerdings Reibung und ähnliches außen vor lässt, gilt in dem abgeschlossenen System der Energieerhaltungssatz, sodass ein Freiheitsgrad verschwindet.
 Ein typischer labiler Zustand liegt zum Beispiel vor, wenn das Pendel mit einem sehr geringen Impuls fast senkrecht nach oben zeigt.
@@ -19,7 +19,7 @@ Die Gleichungen wurden allerdings um die Konstanten $k_1$ bis $k_5$ erweitert, u
 
 Die Positionen der Pendelarme können durch die zwei generalisierten Koordinaten $\phi_1$ und $\phi_2$ beschrieben werden, welche die Winkel der Arme angeben.
 Alle Winkel werden relativ zur Ruhelage angegeben, also bedeutet $0^\circ$, dass ein Pendelarm senkrecht nach unten zeigt, während er bei $45^\circ$ nach unten rechts zeigt.
-Für die vollständige Angabe des Zustands des Systems ist zusätzlich noch der generalisierte Impuls, hier als $p_1$ und $p_2$ bezeichnet, vonnöten.
+Für die vollständige Angabe des Zustands des Systems werden zusätzlich noch die generalisierten Impulse $p_1$ und $p_2$ benötigt.
 
 Aus dem System von Differentialgleichungen für $p_1$, $p_2$, $\phi_1$ und $\phi_2$ lässt sich aus dem aktuellen Zustand der Zustand des Systems zu jeder gegebenen Zeit berechnen.
 Die Berechnung kann zum Beispiel iterativ mit dem Runge"=Kutta"=Verfahren vierter Ordnung erfolgen.
@@ -130,7 +130,7 @@ Diese Gleichung hat zwei Lösungen $\omega_1$ und $\omega_2$, die durch $f=\frac
 Die Maße unseres Pendels, und die Koeffizienten mit einer geschätzten Dichtefunktion lauten:
 \mathematik
 l1a &= -0,1 & l1b &= 0,3 & l1 &= 0,285 & l2a &= -0,11 & lb2 &= 0,19\\
-k1 &= 0,0284 & k2 &= 0,118 & k3 &= 0,5 & k4 &= 0,00441 & k5 &= 0,0254
+k1 &= 0,0284 & k2 &= 0,118 & k3 &= 0,488 & k4 &= 0,00441 & k5 &= 0,0254
 \mathematikstop
 
 Werden diese Wert eingesetzt, kommt man auf die Frequenzen $0,88 Hz$ und $1,46 Hz$.
@@ -155,8 +155,8 @@ Zu erkennen ist die aktuelle Position des Pendels als rote Skizze der Arme.
 Die dicken grünen Balken rechts daneben zeigen auf einer für alle dicken Balken gleichen Skalierung die Energien $T_1$, $T_2$, $T_{Ges}$, $V_1$, $V_2$, $V_{Ges}$ und $E_{Ges}$ in der Reihenfolge von links nach rechts an.
 Der blaue Stricht zeigt die Nulllinie an, die roten Striche die Anfangswerte der Energien.
 Die potentielle Energie ist anfangs kleiner als null, weil der Koordinatenurspung in der ersten Achse liegt und damit die Schwerpunkte der Pendelarme unterhalb des Bezugspunkts liegen.
-Die Gesamtenergie $E_{Ges}$ sollte bei einer perfekten Simulation nicht von ihrem Anfangswert abweichen, aber wie zu sehen ist, wächst sie in unserer Simulation stetig.
-Dies ist auf die Ungenauigkeiten der numerischen Simulation zurückzuführen.
+Die Gesamtenergie $E_{Ges}$ sollte bei einer perfekten Simulation nicht von ihrem Anfangswert abweichen.
+Werden die Schrittweiten für das Runge"=Kutta"=Verfahren kleiner als 10 Millisekunden gewählt, bleibt die Gesamtenergie in den ersten 60 Sekunden auch noch bis 8 Stellen nach dem Komma konstant. \TODO jann?
 
 Rechts neben den dicken Balken ist die diskrete Fourier"=Transformation der Winkel zu sehen.
 Oberhalb der blauen Linie wird die Transformation von $\phi_1$ angezeigt, unterhalb die Transformation von $\phi_2$.
@@ -168,7 +168,7 @@ Die Transformation des zweiten Pendelarms zeigt eine starke Korrelation mit der 
 
 \begin{figure}
   \includegraphics[width=\textwidth]{images/fourier_20s_cropped.png}
-  \caption{Frequenzanalysen bei verschiedenen Starbedingungen.}
+  \caption{Frequenzanalysen bei verschiedenen Starbedingungen. (Erklärung siehe Text)}
   \label{fig:frequencies}
 \end{figure}
 
@@ -287,7 +287,7 @@ In der Vergrößerung ist sehr schön ein fraktales Muster zu erkennen, das typi
         \begin{subfigure}[b]{0.3\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{images/phasenraeume/phi2_is_2_phi1_82.png}
-                \caption{Attraktor}
+                \caption{Möglicher Attraktor}
         \end{subfigure}
         ~
         \begin{subfigure}[b]{0.3\textwidth}
@@ -300,9 +300,9 @@ In der Vergrößerung ist sehr schön ein fraktales Muster zu erkennen, das typi
 \end{figure}
 
 Die Bewegung des Pendels kann in einem dreidimensionalen Raum dargestellt werden.
-Dabei wird auf jeder Raumachse einer der drei wichtigen Freiheitsgrade $\phi_1$, $\phi_2$ und $p_2$ abgetragen.
-Am einfachsten ist dabei der normale kartesische Raum.
-In Abbildung \ref{fig:trajektorien_kartesisch} sind verschiedene Interessante Orbits gezeigt.
+Dabei wird auf jeder Achse einer der drei wichtigen Freiheitsgrade $\phi_1$, $\phi_2$ und $p_2$ abgetragen.
+Am einfachsten ist dabei die normale kartesische Darstellung.
+In Abbildung \ref{fig:trajektorien_kartesisch} sind verschiedene interessante Orbits gezeigt.
 
 Um aber die Periodizität der Winkel abbilden zu können, können Trajektorien auch in einem Torus gezeichnet werden, sodass $\phi_1$ auf der torodialen Achse, $\phi_2$ auf der poloidalen Achse und $p_2$ als Entfernung vom Mittelkreis des Torus dargestellt werden.
 In Abbildung \ref{fig:vergleich_systeme} ist der Vergleich zwischen den beiden Darstellungsweisen gezeigt.
