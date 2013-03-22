@@ -192,12 +192,26 @@ Zusätzlich versendet der \app{Tracker} den Index der Messspule mit dem größte
 
 \subsection{Latenzmessung}
 
-Wie oben schon gesagt ist der Analog"=Digital"=Wandler der langsamste Teil des Aufbaus.
-Aus der Samplerate von 555 Samples pro Sekunde die am Computer gemessen kann auf die Ausleserate vom ADC geschlossen werden, nämlich $0.11 ms / Sample$.
+Bei der Beeinflussung muss beachtet werden, dass die Latenz (Verzögerung) der Mess- und Steuerdaten zwischen den Mess- und Beeinflussungsspulen
+und dem Computer nicht zu groß ist, denn eine zu hohe Latenz führt dazu, dass die Beeinflussung zu stark zeitversetzt zur echten Pendelbewegung
+passiert. Beim Zuführen von Energie in das System hätte dies beispielsweise zur Folge, dass die Beeinflussungsspule den Magneten erst abstößt, wenn
+er sich bereits ein Stück weit entfernt hat, wodurch die Beeinflussung weniger stark ausfallen würde. Um herauszufinden, ob dies für unseren
+Aufbau relevant ist, haben wir eine Messung der Round"=Trip"=Time durchgeführt.
 
-Die Latenz ist die Zeit, die zwischen den beiden Ereignissen vergeht, dass der Magnet mit einer Spule wechselwirkt und der Computer das registriert.
+Als Round"=Trip"=Time wird die Zeit bezeichnet, die ein Signal benötigt, um von einem System zum anderen und wieder zurück zu gelangen, also in
+unserem Fall vom Computer in die Beeinflussungsspule und dann über die Messspule wieder zurück in den Computer.
 
-\TODO Round Trip Time (jann?) %TODO
+Aus der Samplerate von 555 Samples pro Sekunde, die am Computer gemessen wird, kann auf die Ausleserate vom ADC geschlossen werden, nämlich $110 \si{\us} / Sample$. Da der Analog"=Digital"=Wandler eine sogenannte Sample"=And"=Hold"=Schaltung benutzt, also Änderungen des Messwerts nach
+Messbeginn nicht mehr den gemessenen Wert beeinflussen können, benötigt ein Eingangswert also bereits mindestens diese Zeit, um den Computer
+zu erreichen.
+
+Um die Round"=Trip"=Time zu messen, haben wir ein Programm geschrieben, das das Grundrauschen einer Messspule misst und dann an eine direkt
+neben diese Messspule gestellte Arbeitsspule den Befehl zur Beeinflussung sendet. Anschließend misst es die Zeit, bis ein Wert außerhalb des
+Rauschens an der Messspule gemessen wird. Dieser Vorgang wird wiederholt durchgeführt.
+
+\TODO hannes? ist 2m/s passend?
+Die Auswertung der Messwerte hat ergeben, dass die gemessenen Werte zwar variieren, aber immer unter $800 \si{\us}$ und meist auch unter $400 \si{\us}$ liegen. Wenn wir eine maximale Bewegungsgeschwindigkeit des Pendels von $2 \si{m/s}$ annehmen, bedeutet das, dass sich das Pendel nur
+$2 \si{m/s} * 400 \si{\us} = 1.6 \si{mm}$ weit von der Spule entfernen kann, bevor die Spule aktiviert wird. Diese Geschwindigkeit sollte mehr als ausreichend hoch sein.
 
 \section{Vorhersage und Kontrolle des Systems}
 
