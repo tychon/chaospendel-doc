@@ -65,7 +65,7 @@ L &= && T_1 + T_2 - (V_1 + V_2) \\
   &&& + g k_2  cos \phi_1 + g l_1 k_3 cos \phi_1 + g k_5 cos \phi_2
 \mathematikstop
 
-Daraus ergeben sich folgende Euler-Lagrange-Gleichungen:
+Der Lagrange-Formalismus lautet:
 
 \mathematik
 \dot{p}_1 - \frac{\partial L}{\partial \phi_1} &= 0 \qquad &\text{mit}\quad && p_1 = \frac{\partial L}{\partial \phid_1} \\
@@ -166,31 +166,47 @@ Aus dem aktuell zu sehenden Fester ist zum Beispiel für den ersten Pendelarm ab
 
 Die Transformation des zweiten Pendelarms zeigt eine starke Korrelation mit der Transformation des ersten Pendelarms. Das liegt daran, dass für diese Abbildung eine relativ stark periodische Einstellung des Systems gewählt wurde und der zweite Pendelarm eine dem ersten Pendelarm ähnliche Bewegung durchführt.
 
-\subsection{Untersuchung des Frequenzspektrums}
-
-\begin{figure}[bht]
-  \includegraphics[width=\textwidth]{images/frequencies_text.png}
+\begin{figure}
+  \includegraphics[width=\textwidth]{images/fourier_20s_cropped.png}
   \caption{Frequenzanalysen bei verschiedenen Starbedingungen.}
   \label{fig:frequencies}
 \end{figure}
 
+\subsection{Untersuchung des Frequenzspektrums}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \includegraphics[width=0.5\textwidth]{images/fourier_100_400_900.png}
+  \caption{Drei Fourieranalysen mit unterschiedlichen Startbedinungen.}
+  \label{fig:fourieranalysen}
+\end{wrapfigure}
+
 Wenn die Simulation sehr oft durchgeführt wird und bei jeder Ausführung der Startwinkel $\phi_1$ um einen kleinen Schritt vergrößert wird, kann das Verhalten des Systems bei verschiedenen Energien untersucht werden.
 Der Winkel des zweiten Pendelarms wird dabei immer mit der doppelten Größe initialisiert: $\phi_2 = 2\phi_1$.
 
-In Abbildung \ref{fig:frequencies} ist ein Diagramm zu sehen, in dem von links nach rechts die Startbedingungen mit $\phi_1$ linear von $0\;rad$ bis $\pi/4\;rad$ vergrößert werden.
-Auf der vertikalen Achse sind die Positionen der Maxima aus der Fourieranalyse für die ersten 12 Sekunden der Simulation aufgetragen. Je höher dort ein schwarzer Punkt liegt, desto höher ist die Frequenz.
+In Abbildung \ref{fig:frequencies} ist ein Diagramm zu sehen, in dem von links nach rechts die Startbedingungen mit $\phi_1$ linear von $0\;rad$ bis $\pi/2\;rad$ vergrößert werden.
+Auf der vertikalen Achse sind die Positionen der Maxima aus der Fourieranalyse für die ersten 20 Sekunden der Simulation aufgetragen.
+Jeder Pixel der Grafik entspricht dabei einem Element aus der Fourierreihe.
 
-Auf den ersten Blick sind mehrere Abschnitte zu sehen, in denen das Pendel in verschieden vielen Frequenzen schwingt: Im ersten Bereich sind nur zwei Frequenzen vorhanden. Danach ist eine Verdopplung der Frequenzen zu beobachten und dann der Übergang in den chaotischen Bereich, in dem sehr viele Frequenzen zu finden sind. Am rechten Rand des Diagramms ist schön zu erkennen, wie sehr kleine Änderungen in den Startbedingungen bei großen Energien so starke Abweichungen hervorrufen, dass sie sich sofort im Diagramm niederschlagen.
+Es sind mehrere Abschnitte zu erkennen, in denen unterschiedliche Muster vorherrschen.
+Anfangs sind drei Maxima vorhanden, die den Frequenzen $0,5 Hz$, $1,5 Hz$ und $2,7 Hz$ entsprechen.
+Hier sind die aus der Linearisierung berechneten Eigenfrequenzen wiederzufinden und eine Obschwingung, die zu beiden Frequenzen annähernd harmonisch ist.
+Eine Fourier-Transformation aus diesem Bereich ist als rote Kurve in Abbildung \ref{fig:fourieranalysen} zu sehen.
 
-Interessant ist, dass es eine Grundschwingung gibt, die die ganze Zeit gleich bleibt, und sich erst im allerletzten Teil ein wenig verändert.
-Diese Grundschwingung ist auf die konstante Massenverteilung zurückzuführen, die eine bestimmte Periode bestimmt, ähnlich eines einfachen Pendels.
+Danach ist eine Verdopplung der Frequenzen zu beobachten und dann kommen immer mehr Oberschwingungen hinzu.
+Es sind zwischendurch auch Unterschwingungen zu beobachten.
+Aus diesem Bereich stammt die blaue Transformation in Abbildung \ref{fig:fourieranalysen}.
+
+Im rechten Teil des Diagramms ist zu erkennen, wie sehr kleine Änderungen in den Startbedingungen bei großen Energien so starke Abweichungen hervorrufen, dass sie sich sofort im Diagramm niederschlagen.
+Dies ist der chaotische Bereich, aus dem die grüne Kurve in Abbildung \ref{fig:fourieranalysen} stammt.
+Interessant ist, dass der chaotische Bereich immer wieder für bestimmte Anfangskonfigurationen sehr periodisch wird, wie an den senkrechten weißen Streifen zu sehen ist.
 
 \subsection{Abbildung der Überschläge}
 
 Abhängig von den Startbedingungen kann auch die Anzahl der Überschläge des zweiten Pendelarms gezählt werden und in einem Diagramm farbkodiert aufgetragen werden.
 An den Winkeln kann grob ein Überschlag abgelesen werden, wenn $\phi_2$ ein ungerades natürliches Vielfaches von $\pi$ überschreitet: $\phi_2 \in \{ \pm 1 \pi, \pm 3 \pi, \pm 5 \pi, ... \}$.
 Denn genau dann zeigt das untere Pendel senkrecht nach oben und ein Übeschlag ist sehr wahrscheinlich.
-%TODO bilder, mehr text (jann?)
+
+\TODO TODO bilder, mehr text (jann?) %TODO
 
 
 \subsection{Untersuchung des Phasenraums}
@@ -240,6 +256,7 @@ Die Bewegung des Pendels kann in einem dreidimensionalen Raum dargestellt werden
 Dabei wird auf jeder Raumachse einer der drei wichtigen Freiheitsgrade $\phi_1$, $\phi_2$ und $p_2$ abgetragen.
 Am einfachsten ist dabei der normale kartesische Raum.
 Um aber die Periodizität der Winkel abbilden zu können, können Trajektorien auch in einem Torus gezeichnet werden, sodass $\phi_1$ auf der torodialen Achse, $\phi_2$ auf der poloidalen Achse und $p_2$ als Entfernung vom Mittelkreis des Torus dargestellt werden.
-%TODO bilder, text, ...
+
+\TODO TODO bilder, text, ... %TODO
 
 
