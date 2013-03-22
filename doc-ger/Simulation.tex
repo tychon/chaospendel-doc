@@ -232,17 +232,27 @@ Interessant ist, dass der chaotische Bereich immer wieder für bestimmte Anfangs
 
 Abhängig von den Startbedingungen kann auch die Anzahl der Überschläge des zweiten Pendelarms gezählt werden und in einem Diagramm farbkodiert aufgetragen werden.
 An den Winkeln kann grob ein Überschlag abgelesen werden, wenn $\phi_2$ ein ungerades natürliches Vielfaches von $\pi$ überschreitet: $\phi_2 \in \{ \pm 1 \pi, \pm 3 \pi, \pm 5 \pi, ... \}$.
-Denn genau dann zeigt das untere Pendel senkrecht nach oben und ein Übeschlag ist sehr wahrscheinlich.
+Denn genau dann zeigt das untere Pendel senkrecht nach oben und ein Überschlag ist sehr wahrscheinlich.
+
+Da zum Erzeugen eines solchen Überschlagsdiagramms für jeden Pixel das Pendel über längere Zeit simuliert werden muss --- wir haben 60 Sekunden
+als Simulationsdauer gewählt ---, ist es notwendig, die Simulationen sehr schnell ausführen zu können. Zu diesem Zweck haben wir zunächst mit der
+C-Implementierung gearbeitet, die bereits weiter oben angesprochen wurde. Da aber auch diese auf einem Kern einer AMD-Brisbane-4400+-CPU
+(Taktrate 2,3GHz) ca. 40 Minuten für die Simulation von 5000 Durchläufen benötigt, haben wir den C-Code für OpenCL umgeschrieben, sodass er
+parallelisiert auf GPUs funktioniert. GPUs sind darauf optimiert, nach dem SIMD-Prinzip (Single Instruction, Multiple Data) zu arbeiten, das heißt, sie
+können eine Operation parallel auf viele Datensätze anwenden. Das passt zu unserem Problem, denn wir wollen die immer mit den gleichen
+Operationen durchgeführte Simulation des Pendels mit vielen verschiedenen Startwerten laufen lassen. Mit dieser Methode erreichen wir auf einer
+Radeon-HD-5750-Grafikkarte durch die SIMD-Ausführung des Codes Simulationsgeschwindigkeiten von ca. einer Minute für 5000 Durchläufe, was eine
+Verbesserung um $97.5\%$ darstellt.
 
 In Abbildung \ref{fig:fraktale} ist das Ergebnis von drei mal 90000 Durchführungen der Simulation mit 60 Sekunden Simulationszeit zu sehen.
-Jedes Bild hat eine Auflösung von 300 mal 300 Pixeln auf denen auf der waagerechten Achse nach rechts $\phi_1$ und nach oben $\phi_2$ aufgetragen ist.
+Jedes Bild hat eine Auflösung von 300 mal 300 Pixeln, wobei auf der waagerechten Achse nach rechts $\phi_1$ und nach oben $\phi_2$ aufgetragen ist.
 Der grüne Farbanteil codiert die Anzahl der Übeschläge nach links, der blaue Anteil die Überschläge nach rechts.
-Weil die Startbedingungen nur auf der einen Seite des Pendels (für Winkel größer Null) durchgeführt wurden, überwiegt die Anzahl der Überschläge nach links.
+Weil die Startbedingungen nur auf einer Seite des Pendels (für Winkel größer Null) durchgeführt wurden, überwiegt die Anzahl der Überschläge nach links.
 
 In Bild \ref{fig:fraktale_gesamt} ist $\phi_1$ im Intervall $[0; \pi/2]$ und nach oben ist $\phi_2$ im Intervall $[0; \pi]$ zu sehen.
-Im schwarzen Bereich ist einfach nicht genug Energie im System für einen Überschlag.
-Interessant ist der blaue Bereich unten rechts, in dem überwiegend Überschläge nach rechts stattfinden, und der Bereich in der Mitte oben, in dem die Struktur zerfasert.
-Zwei Ausschnitte aus diesem letzten Bereich sind in Abbildung \ref{fig:fraktale_c} und \ref{fig:fraktale_d} gezeigt.
+Im schwarzen Bereich ist nicht genug Energie für einen Überschlag im System.
+Interessant sind der blaue Bereich unten rechts, in dem überwiegend Überschläge nach rechts stattfinden, und der Bereich in der Mitte oben, in dem die Struktur zerfasert.
+Zwei Ausschnitte aus diesem letzten Bereich sind in den Abbildungen \ref{fig:fraktale_c} und \ref{fig:fraktale_d} gezeigt.
 
 In der Vergrößerung ist sehr schön ein fraktales Muster zu erkennen, das typisch für chaotische Systeme ist, wie zum Beispiel dem magnetischen Pendel. \citep{wikimagnetisch}
 
