@@ -1,0 +1,134 @@
+\documentclass[a3paper, 12pt, landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ngerman, lmodern}
+\usepackage[left=1cm, right=1cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{color, amsmath, amsthm, caption}
+\usepackage{fancyhdr}
+  \lhead{}
+  \chead{}
+  \rhead{\nouppercase\leftmark}
+  \lfoot{}
+  \cfoot{\thepage}
+  \rfoot{}
+\usepackage{multicol}
+\columnseprule0.4pt
+\columnsep1cm
+
+\usepackage{graphicx}
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\newcommand{\TODO}{\textcolor{red}{ \textbf TODO }}
+\newcommand{\mathematik}{\begin{equation*}\begin{aligned}}
+\newcommand{\mathematikstop}{\end{aligned}\end{equation*}}
+\renewcommand{\phi}{\varphi} % make "stroked" phi look "loopy"
+\renewcommand{\rho}{\varrho}
+\newcommand{\half}{\frac{1}{2}} % 1/2
+\newcommand{\phid}{\dot{\phi}}  % phi with one dot
+\newcommand{\phidd}{\ddot{\phi}}  % phi with two dots
+\newcommand{\intend}{\,\mathrm{d}} % end of integral
+\newcommand{\EQU}{\qquad\bigg|\,} % separator for explanations for equivalent rearrangements
+
+\newcommand{\qtel}{\frac{1}{q}} % separator for explanations for equivalent rearrangements
+
+\title{\vspace{-4cm}\fontsize{96pt}{100pt}\selectfont Linearisierung und Frequenzberechnung}
+\author{ }
+\date{ }
+
+\begin{document}
+\LARGE
+\maketitle
+\begin{multicols}{2}
+
+Für sehr kleine Auslenkungen $a < 5^\circ$ können die Differentialgleichungen linearisiert werden, indem durch die Annäherungen $cos(\alpha) \approx 1$ und $sin(\alpha) \approx \alpha$ die nicht linearen Anteile eliminiert werden.
+
+\mathematik
+\phid_1 &= \frac{k_4 p_1 - k_5 l_1 p_2}{k_1 k_4 + l_1^2 (k_3 k_4 - k_5^2}\\
+\phid_2 &= \frac{k_1 p_2 - l_1 (k_3 l_1 p_2 - k_5 p_1)}{k_1 k_4 + l_1^2 (k_3 k_4 - k_5^2}\\
+\dot{p}_1 &= -g k_2 \phi_1 - g l_1 k_3 \phi_1 \\
+\dot{p}_2 &= -g k_5 \phi_2 \\
+\mathematikstop
+
+Nun werden $\phid_1$ und $\phid_2$ noch einmal abgeleitet und $\dot{p}_1$ $\dot{p}_2$ eingesetzt:
+
+\mathematik
+\phidd_1 &= \frac{-g (k_2 k_4 \phi_1 + l_1 (k_3 k_4 \phi_1 - k_5^2 \phi_2))}{k_1 k_4 + l_1^2 (k_3 k_4 - k_5^2)} \\
+\phidd_1 &= \frac{-g k_5 (k_1 \phi_2 - l_1 (k_2 \phi_1 + k_3 l_1 (\phi_1-\phi_2)))}{k_1 k_4 + l_1^2 (k_3 k_4 - k_5^2)} \\
+\mathematikstop
+
+\columnbreak
+Mit $q = k_1 k_4 + l_1^2 (k_3 k_4 - k_5^2)$ lassen sich diese Gleichungen so schreiben:
+
+\mathematik
+\phidd_1 &= -g k_2 k_4 \phi_1 \qtel - g l_1 k_3 k_4 \phi_1 \qtel + g l_1 k_5^2 \phi_2 \qtel \\
+\phidd_2 &= -g k_1 k_5 \phi_2 \qtel + g k_2 k_5 l_1 \phi_1 \qtel + g k_3 k_5 l_1^2 \phi_1 \qtel - g k_3 k_5 l_1^2 \phi_2 \qtel \\
+\mathematikstop
+
+So können sie dann in folgende Form gebracht werden. Dies sind die linearisierten Bewegungsgleichungen des Doppelpendels:
+
+\mathematik
+\textcolor{red}{\phidd_1} &\textcolor{red}{= a \phi_1 + b \phi_2}\\
+\textcolor{red}{\phidd_2} &\textcolor{red}{= c \phi_1 + d \phi_2}\\
+\mathematikstop
+
+\mathematik
+\textcolor{red}{a}   &\textcolor{red}{= \frac{-g k_4 (k_2 + l_1 k_3)}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2)}}
+& \textcolor{red}{b} &\textcolor{red}{= \frac{g k_5^2 l_1}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2)}} \\
+\textcolor{red}{c}   &\textcolor{red}{= \frac{g k_5 l_1 (k_2 + k_3 l_1)}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2)}}
+& \textcolor{red}{d} &\textcolor{red}{= \frac{-g k_5 (k_1 + k_3 l_1^2)}{k_1 k_4 + l_1^2 \cdot (k_3 k_4 - k_5^2)}} \\
+\mathematikstop
+
+\columnbreak
+Über den Ansatz
+
+\mathematik
+\phi_1 &= A_1 sin\, \omega t
+& \phi_2 &= A_2 sin\, \omega t \\
+\phidd_1 &= - \omega^2 A_1 sin\, \omega t
+& \phidd_2 &= - \omega^2 A_2 sin\, \omega t \\
+\mathematikstop
+
+kommt man zu der Matrizengleichungung:
+
+\mathematik
+\begin{pmatrix}0 \\ 0\end{pmatrix} &=
+\begin{pmatrix}
+a+\omega^2 & b\\
+c & d+\omega^2
+\end{pmatrix}
+\begin{pmatrix}A_1 \\ A_2\end{pmatrix}
+\mathematikstop
+
+Da diese Gleichung nur lösbar ist, wenn die Determinante der Koeffizentenmatrix Null ist, muss diese quadratische Gleichung gelten:
+
+\mathematik
+(a + \omega^2) \cdot (d + \omega^2) - b \cdot c = 0
+\mathematikstop
+
+Diese Gleichung hat zwei Lösungen $\omega_1$ und $\omega_2$, die durch $f=\frac{\omega}{2\pi}$ in die Frequenzen umgerechnet werden können.
+
+Die Maße unseres Pendels, und die Koeffizienten mit einer geschätzten Dichtefunktion lauten:
+\mathematik
+l1a &= -0,1m & l1b &= 0,3m & l1 &= 0,285m \\
+l2a &= -0,11m & l2b &= 0,19m \\
+\mathematikstop
+\mathematik
+k1 &= 0,0284 kg\,m^2 \;\; & k2 &= 0,118 kg\,m \\
+k3 &= 0,488 kg & k4 &= 0,00441kg\,m^2 \\
+k5 &= 0,0254kg\,m
+\mathematikstop
+
+Werden diese Wert eingesetzt, kommt man auf die Frequenzen
+
+\mathematik
+\textcolor{red}{f_1} &\textcolor{red}{= 0,88Hz} \text{ und}\\
+\textcolor{red}{f_2} &\textcolor{red}{= 1,46 Hz}.
+\mathematikstop
+
+%\columnbreak\strut % avoid opening of second column
+\end{multicols}
+\end{document}
+
